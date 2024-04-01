@@ -1,0 +1,27 @@
+{
+  "name": "isys2101_sgs_6_sepm",
+  "version": "1.0.0",
+  "description": "Repository for Semester A 2024 ISYS2101 - Software Engineering Project Management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "agenda": "^5.0.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "chart.js": "^4.4.2",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.2.4",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.0",
+    "validator": "^13.11.0"
+  }
+}
