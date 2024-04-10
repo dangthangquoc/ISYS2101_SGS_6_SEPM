@@ -14,14 +14,14 @@ const Agenda = require('agenda');
 const authRoutes = require('./routes/authRoutes');
 
 // Importing middleware
-const { requireAuth, checkUser, isAdmin } = require('./middleware/authMiddleware');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 // Importing models
 const User = require('./models/user');
 
 // Initializing express app
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // Setting up middleware
 app.use(express.urlencoded({ extended: true }));
