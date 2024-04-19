@@ -18,6 +18,9 @@ const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 // Importing models
 const User = require('./models/user');
+const Team = require('./models/team');
+const Player = require('./models/player');
+const Deal = require('./models/deal')
 
 // Initializing express app
 const app = express();

@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema({
         require: [true, 'Please enter your password'],
         minlength: [6, 'Minimum password length is 6 characters']
     },
-    deal: {
+    userHistory: {
         type: mongoose.Types.ObjectId,
-        ref: "deal"
+        ref: "UserHistory"
     },
 },
     {
