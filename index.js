@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static('frontend'));
 
 // Checking user for all routes
 app.get('*', checkUser);
@@ -56,7 +56,23 @@ mongoose.connect(mongoURI)
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch((error) => console.log(error.message));
 
+// Middleware for image upload
+const userImgStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'frontend/images/');
+  },
+  filename: function(req, file, cb) {
+      const token = req.cookies.jwt;
+      const decodedToken = jwt.verify(token, 'your-secret-key');
+      const userId = decodedToken.id;
+      const date = new Date();
+      const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+      const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+      cb(null, newFilename);
+  }
+});
 
+const userImgUpload = multer({ storage: userImgStorage });
 
 
 app.listen(port, () => {
