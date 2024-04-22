@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="../frontend/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 <body>
@@ -30,10 +30,10 @@
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
                 </div>
+                <div class="profile-photo">
+                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %>'s Profile Picture">
+                </div>
                 <div class="profile">
-                    <div class="profile-photo">
-                        <img src="<%= user.profileImage %>" alt="<%= user.fullName %>'s Profile Picture">
-                    </div>
                     <h5><%= fullName %></h5>
                     <span class="material-icons-sharp">expand_more</span>
                 </div>

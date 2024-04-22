@@ -1,0 +1,94 @@
+<form enctype="multipart/form-data" action="/addplayer">
+    <h2>Add Player</h2>
+    <label for="playerImage">Player Image</label>
+    <input type="file" name="playerImage" />
+    <div class="playerImage error"></div>
+
+    <lable for="playerName">playerName</lable>
+    <input type="text" name="playerName"/>
+    <div class="playerName error"></div>
+
+    <lable for="position">position</lable>
+    <input type="text" name="position"/>
+    <div class="position error"></div>
+
+    <lable for="dob">dob</lable>
+    <input type="number" name="dob"/>
+    <div class="dob error"></div>
+
+    <lable for="transferPrice">transferPrice</lable>
+    <input type="text" name="transferPrice"/>
+    <div class="transferPrice error"></div>
+
+
+    <label for="team">Select an Team:</label>
+    <select id="team" name="team">
+      <% team.forEach(team => { %>
+        <option value="<%= team._id %>" name="team"><%= team.name %></option>
+      <% }); %>
+    </select>
+    <div class="team error"></div>
+    
+    <button type="submit">Add</button>
+</form>
+
+  <script>
+    const form = document.querySelector('form');
+    // read the error
+    const playerImageError = document.querySelector('.playerImage.error');
+    const playerNameError = document.querySelector('.playerName.error');
+    const positionError = document.querySelector('.position.error');
+    const dobError = document.querySelector('.dob.error');
+    const transferPriceError = document.querySelector('.transferPrice.error');
+    const teamError = document.querySelector('.team.error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        //reset errors
+        playerImageError.textContent = '';
+        playerNameError.textContent = '';
+        positionError.textContent = '';
+        dobError.textContent = '';
+        transferPriceError.textContent = '';
+        teamError.textContent = '';
+
+        // Create a FormData instance
+        const formData = new FormData();
+        formData.append('playerImage', form.ISBN.value);
+        formData.append('playerName', form.title.value);
+        formData.append('position', form.numberOfPages.value);
+        formData.append('dob', form.author.value);
+        formData.append('transferPrice', form.category.value);
+        formData.append('team', form.publisher.value);
+        if (form.playerImage.files.length > 0) {
+          formData.append('playerImage', form.playerImage.files[0]);
+        }
+
+        console.log(formData);
+        
+        try{
+            const res = await fetch('/addPlayer', {
+                method: 'POST',
+                body: formData, // Send the form data
+            });
+            const data = await res.json();
+            console.log(data);
+
+            if (data.errors){
+                playerImageError.textContent = data.errors.playerImage;
+                playerNameError.textContent = data.errors.playerName;
+                positionError.textContent = data.errors.position;
+                dobError.textContent = data.errors.dob;
+                transferPriceError.textContent = data.errors.transferPrice;
+                teamError.textContent = data.errors.team;
+            }
+            else{
+                descriptionError.textContent = ('Added successfully');
+            }
+        }
+        catch (err){
+            console.log(err);
+        }
+    });
+</script>
+
