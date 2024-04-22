@@ -18,6 +18,14 @@ const teamSchema = new mongoose.Schema({
         type: String,
         require: [true, 'Please enter team market value'],
     },
+    transferRecord: {
+        type: float,
+        require: [true, 'Please enter team transfer record']
+    },
+    avgPlayerValue:{
+        type: float,
+        require: [true, 'Please enter average player value']
+    },
     avgAge: {
         type: float,
         require: [true, 'Please enter team average'],
