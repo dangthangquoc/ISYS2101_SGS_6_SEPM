@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <!-- navbar -->
+    <nav>
+        <div class="container">
+            <img src="img/fsrs.png" class="logo" alt="logo">
+            <div class="search-bar">
+                <span class="material-icons-sharp">search</span>
+                <input type="search" placeholder="Search">
+            </div>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="profile-photo">
+                        <img src="img/profile-1.png" alt="profile1">
+                    </div>
+                    <h5>Creasic</h5>
+                    <span class="material-icons-sharp">expand_more</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+
+    <main>
+
+        <!-- aside -->
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons-sharp">close</span>
+            </button>
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">currency_exchange</span>
+                    <h4>Market</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">pie_chart</span>
+                    <h4>Analytics</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">help_center</span>
+                    <h4>Help Center</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h4>Settings</h4>
+                </a>
+            </div>
+            <div class="updates">
+                <span class="material-icons-sharp">update</span>
+                <h4>Updates Available</h4>
+                <small>Security Updates</small>
+                <small>General Updates</small>
+                <a href="#">Update Now</a>
+            </div>
+        </aside>
+
+        <!--Middle Section-->
+        <section class="middle">
+            <main class="table" id="customers_table">
+            
+                <section class="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Team </th>
+                                <th> Name </th>
+                                <th> Squad Size </th>
+                                <th> Market Value </th>
+                                <th> Avg Players Value </th>
+                                <th> Average Age </th>
+                                <th> Current Transfer Record </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> <img src="img/arsenal.png" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/astonvilla.png" alt=""></td>
+                                <td> Aston Villa </td>
+                                <td> 27 </td>
+                                <td> €646.20m </td>
+                                <td> €34.17m </td>
+                                <td> 26.3 </td>
+                                <td> <strong> €-78.95m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/bournemouth.png" alt=""></td>
+                                <td> Bournemouth </td>
+                                <td> 26 </td>
+                                <td> €352.80m </td>
+                                <td> €34.17m </td>
+                                <td> 25.8 </td>
+                                <td> <strong> €-125.79m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/brentford.png" alt=""></td>
+                                <td> Brentford </td>
+                                <td> 30 </td>
+                                <td> €426.08m </td>
+                                <td> €34.17m </td>
+                                <td> 25.7 </td>
+                                <td> <strong> €-62.26m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/brighton.png" alt=""></td>
+                                <td> Brighton & Hove Albion </td>
+                                <td> 27 </td>
+                                <td> €505.10m </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €+86.40m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/burnley.png" alt=""></td>
+                                <td> Burnley </td>
+                                <td> 29 </td>
+                                <td> €256.10m </td>
+                                <td> €34.17m </td>
+                                <td> 25.2 </td>
+                                <td> <strong> €-107.25m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/chelsea.png" alt=""></td>
+                                <td> Chelsea</td>
+                                <td> 30 </td>
+                                <td> €928.30m </td>
+                                <td> €34.17m </td>
+                                <td> 23.6 </td>
+                                <td> <strong> €-198.030m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/crystalpalace.png" alt=""></td>
+                                <td> Crystal Palace </td>
+                                <td> 28 </td>
+                                <td> €404.70m </td>
+                                <td> €34.17m </td>
+                                <td> 26.4 </td>
+                                <td> <strong> €-67.80m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/everton.png" alt=""></td>
+                                <td> Everton </td>
+                                <td> 25 </td>
+                                <td> €345.40m </td>
+                                <td> €34.17m </td>
+                                <td> 27.3 </td>
+                                <td> <strong> €+42.30m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/fulham.png" alt=""></td>
+                                <td> Fulham </td>
+                                <td> 24 </td>
+                                <td> €338.00m </td>
+                                <td> €34.17m </td>
+                                <td> 28.1 </td>
+                                <td> <strong> €-15.27m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="img/liverpool.png" alt=""></td>
+                                <td> Liverpool </td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="images/Zinzu Chan Lee.jpg" alt=""></td>
+                                <td> Arsenal</td>
+                                <td> 25 </td>
+                                <td> €1.12bn </td>
+                                <td> €34.17m </td>
+                                <td> 25.6 </td>
+                                <td> <strong> €-167.04m </strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </section>
+
+
+
+
+
+
+
+    <script src="simpleScript.js"></script>
+</body>
+</html>
