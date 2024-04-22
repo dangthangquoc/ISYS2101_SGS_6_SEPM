@@ -64,7 +64,7 @@ userSchema.statics.login = async function(email, password) {
 };
 
 // Define a model based on the schema
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('user', userSchema);
 
 // the module exports the "Product" model so that it can be used by other parts of the application.
 module.exports = User;

@@ -19,7 +19,7 @@ const playerSchema = new mongoose.Schema({
         require: [true, 'Please enter player date of birth'],
     },
     transferPrice: {
-        type: float,
+        type: String,
         require: [true, 'Please enter player transfer price'],
     },
     team : {

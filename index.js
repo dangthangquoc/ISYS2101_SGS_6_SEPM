@@ -78,10 +78,6 @@ const userImgStorage = multer.diskStorage({
 const userImgUpload = multer({ storage: userImgStorage });
 
 
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
-
 
 // My Account page
 app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
@@ -99,8 +95,6 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
     // Fetch all authors and publishers from the database
     const player = await Player.find();
     const team = await Team.find();
-    const category = await Category.find();
-
   
     // Fetch the user's details and populate their deals
     const userDetails = await User.findById(user._id)
@@ -114,79 +108,215 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
     }
   
     // Fetch all transactions
-    const transactions = await Transaction.find();
+    // const transactions = await Transaction.find();
   
     // Update the status and fine of overdue transactions
-    await Promise.all(transactions.map(async (transaction) => {
-      if ((transaction.returnDate < Date.now() && transaction.status == 'Reserved') || (transaction.returnDate < Date.now() && transaction.status == 'Overdue')) {
-        await Transaction.findByIdAndUpdate(
-          transaction._id,
-          {
-            $set: {
-              status: 'Overdue',
-              fine: 1000 * Math.floor((Date.now() - new Date(transaction.returnDate)) / (1000 * 60 * 60 * 24))
-            }
-          },
-          { new: true },
-        );
-      }
-    }));
+    // await Promise.all(transactions.map(async (transaction) => {
+    //   if ((transaction.returnDate < Date.now() && transaction.status == 'Reserved') || (transaction.returnDate < Date.now() && transaction.status == 'Overdue')) {
+    //     await Transaction.findByIdAndUpdate(
+    //       transaction._id,
+    //       {
+    //         $set: {
+    //           status: 'Overdue',
+    //           fine: 1000 * Math.floor((Date.now() - new Date(transaction.returnDate)) / (1000 * 60 * 60 * 24))
+    //         }
+    //       },
+    //       { new: true },
+    //     );
+    //   }
+    // }));
   
     // Fetch the book details for each of the user's active transactions
-    const allActiveTransactions = await Promise.all(
-      userDetails.activeTransactions.map(async (transaction) => {
-        const book = await getBookById(transaction.bookId);
-        return {
-          bookTitle: book.title,
-          status: transaction.status,
-          pickUpDate: transaction.pickUpDate,
-          returnDate: transaction.returnDate,
-          fine: transaction.fine,
-        };
-      })
-    );
+    // const allActiveTransactions = await Promise.all(
+    //   userDetails.activeTransactions.map(async (transaction) => {
+    //     const book = await getBookById(transaction.bookId);
+    //     return {
+    //       bookTitle: book.title,
+    //       status: transaction.status,
+    //       pickUpDate: transaction.pickUpDate,
+    //       returnDate: transaction.returnDate,
+    //       fine: transaction.fine,
+    //     };
+    //   })
+    // );
   
     // Fetch the book details for each of the user's previous transactions
-    const allPrevTransactions = await Promise.all(
-      userDetails.prevTransactions.map(async (transaction) => {
-        const book = await getBookById(transaction.bookId);
-        return {
-          bookTitle: book.title,
-          status: transaction.status,
-          pickUpDate: transaction.pickUpDate,
-          returnDate: transaction.returnDate,
-          fine: transaction.fine,
-        };
-      })
-    );
+    // const allPrevTransactions = await Promise.all(
+    //   userDetails.prevTransactions.map(async (transaction) => {
+    //     const book = await getBookById(transaction.bookId);
+    //     return {
+    //       bookTitle: book.title,
+    //       status: transaction.status,
+    //       pickUpDate: transaction.pickUpDate,
+    //       returnDate: transaction.returnDate,
+    //       fine: transaction.fine,
+    //     };
+    //   })
+    // );
   
-    // Fetch the user and book details for each transaction
-    const transactionsWithDetails = await Promise.all(
-      transactions.map(async (transaction) => {
-        const user = await User.findById(transaction.userId).exec();
-        const book = await Book.findById(transaction.bookId).exec();
+    // // Fetch the user and book details for each transaction
+    // const transactionsWithDetails = await Promise.all(
+    //   transactions.map(async (transaction) => {
+    //     const user = await User.findById(transaction.userId).exec();
+    //     const book = await Book.findById(transaction.bookId).exec();
   
-        const userEmail = user ? user.email : 'User not found';
-        const bookTitle = book ? book.title : 'Book not found';
+    //     const userEmail = user ? user.email : 'User not found';
+    //     const bookTitle = book ? book.title : 'Book not found';
   
-        return {
-          _id: transaction._id,
-          userEmail: userEmail,
-          bookTitle: bookTitle,
-          status: transaction.status,
-          pickUpDate: transaction.pickUpDate,
-          returnDate: transaction.returnDate,
-          fine: transaction.fine,
-        };
-      })
-    );
+    //     return {
+    //       _id: transaction._id,
+    //       userEmail: userEmail,
+    //       bookTitle: bookTitle,
+    //       status: transaction.status,
+    //       pickUpDate: transaction.pickUpDate,
+    //       returnDate: transaction.returnDate,
+    //       fine: transaction.fine,
+    //     };
+    //   })
+    // );
   
     // Render the 'myAccount' page with the fetched data
-    res.render('myAccount', { user: user, books: books, allActiveTransactions, allPrevTransactions, transactions: transactionsWithDetails, authors: authors, publishers: publishers });
+    res.render('myAccount', { user: user, player: player, team: team});
   
   } catch (error) {
     // Log any error that occurs and return a 500 error
     console.error('Error processing transactions:', error);
     res.status(500).send('Internal Server Error');
   }
+});
+
+app.get('/', checkUser, async (req,res) => {
+  try {
+    // Fetch all authors, categories, and publishers from the database
+    const team = await Team.find();
+    const player = await Player.find();    
+  
+    // Fetch all books and populate their author, category, and publisher fields
+    let deal = await Player.find().populate('team');
+  
+    // Get the total count of books
+    // const count = await Book.countDocuments();
+  
+    // Get the current date in YYYY-MM-DD format
+    // const currentDate = new Date().toISOString().slice(0,10);
+  
+    // If there is no selected book or the selected date is not the current date
+    // if (!selectedBook || selectedDate !== currentDate) {
+    //   // Generate a random number within the range of the total book count
+    //   const random = Math.floor(Math.random() * count);
+  
+    //   // Select a random book and set it as the selected book
+    //   selectedBook = await Book.findOne().skip(random);
+  
+    //   // Set the selected date as the current date
+    //   selectedDate = currentDate;
+    // }
+  
+    // Fetch the latest 5 reviews
+    // const reviews = await Review.find().limit(5);
+  
+    // Map over the reviews to fetch the user who made each review
+    // const reviewsWithUser = await Promise.all(reviews.map(async (review) => {
+    //   const user = await User.findById(review.userId);
+    //   return {
+    //     ...review._doc,
+    //     reviewedUser: user
+    //   };
+    // }));
+  
+    // Render the index page with the fetched data
+    res.render('index', {player, team});
+  
+  } catch (err) {
+    // Log any error that occurs and redirect to the home page
+    console.error(err);
+    res.redirect('/');
+  }
+});
+
+app.get('/updateUser', requireAuth, (req, res) => {
+  res.render('updateUser');
+});
+
+app.post('/updateUserImage', requireAuth, checkUser, userImgUpload.single('profileImage'), async (req, res) => {
+  
+  try {
+    // Get the user from res.locals
+    const user = res.locals.user;
+
+    // If the user already has a profile image that is not the default image
+    if (user.profileImage && user.profileImage !== 'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg') {
+      // Delete the existing profile image
+      fs.unlink(path.join(__dirname, 'public', user.profileImage), err => {
+        // Log any error that occurs while deleting the image
+        if (err) console.error(err);
+      });
+    }
+
+    // Extract the filename from the uploaded file
+    let profileImage = "/images" + (req.file ? req.file.filename : '');
+
+    // If the user has sent '/images/userImage/', replace it with the default image URL
+    if (profileImage === '/images') {
+      profileImage = 'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg';
+    }
+
+    // Update the user's profile image in the database
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user._id }, // find a user with the provided user ID
+      { profileImage }, // update the user with the new image
+      { new: true } // return the updated user
+    );
+
+    // If the user is not found, return a 404 error
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Send a response indicating that the update was successful
+    res.json({ message: 'Image update successful' });
+  } catch (error) {
+    // Log any error that occurs and return a 500 error
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while updating the user image' });
+  }
+});
+
+// Route for updating the user's details
+app.post('/updateUserDetails', requireAuth, checkUser, async (req, res) => {
+  // Extract the full name, email, phone and password from the request body
+  const { fullName, email, phone, password } = req.body;
+  console.log(req.body);
+
+  try {
+    // Get the user ID from res.locals
+    const userId = res.locals.user._id;
+
+    // Salt and hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Update the user's details in the database
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId }, // find a user with the provided user ID
+      { fullName, email, phone, password: hashedPassword }, // update the user with the new details
+      { new: true } // return the updated user
+    );
+
+    // If the user is not found, return a 404 error
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Send a response indicating that the update was successful
+    res.json({ message: 'Details update successful' });
+  } catch (error) {
+    // Log any error that occurs and return a 500 error
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while updating the user details' });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
