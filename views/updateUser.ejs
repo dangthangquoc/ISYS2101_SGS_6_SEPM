@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Edit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/updateUser.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/material/favicon-removebg-preview1.png">
+</head>
+
+<body>
+    <header class="header">
+
+        <section class="header-1">
+
+            <a href="/" class="logo"> <i class="fas fa-play"></i> playbook </a>
+
+            <form action="/searchResult" method="get" class="search-form">
+                <input type="search" name="query" placeholder="search here..." id="search-box">
+                <label for="search-box" class="fas fa-search" id="search-icon"></label>
+                <input type="submit" style="display: none;">
+            </form>
+
+            <div class="icons">
+                <div id="search-btn" class="fas fa-search"></div>
+                <% if (user) { %>
+                    <% if (!user.isAdmin) { %>
+                        <a href="/wishlist" class="fas fa-heart"></a>
+                        <a href="/userReservations" class="fas fa-list"></a>
+                    <% } else { %>
+                        <a href="/dashboard" class="fas fa-tachometer-alt"></a>
+                    <% } %>
+                    <a href="/myAccount" class="fas fa-user"></a>
+                <%} else { %>
+                    <a href="/login" class="fas fa-heart"></a>
+                    <a href="/login" class="fas fa-list"></a>
+                    <a href="/login" class="fas fa-user"></a>
+                <%} %>
+            </div>
+
+
+        </section>
+
+
+    </header>
+
+    <!-- header section ends -->
+
+    <!-- bottom navbar  -->
+<section class="main-part">
+    <form id="imageForm">
+        <label for="profileImage">Profile Image</label>
+        <input class="input-form" type="file" name="profileImage" accept="image/*"/>
+        <div class="profileImage error"></div>
+        <button>Save Image</button>
+    </form>
+    
+    <!-- Form for updating the user's details -->
+    <form id="detailsForm">
+        <label for="fullName">Full Name*</label>
+        <input class="input-form" type="text" name="fullName" value="<%= user.fullName %>"/>
+        <div class="fullName error"></div>
+    
+        <label for="email">Email*</label>
+        <input class="input-form" type="text" name="email" value="<%= user.email %>"/>
+        <div class="email error"></div>
+
+        <label for="phone">Phone number*</label>
+        <input class="input-form" type="text" name="phone" value="<%= user.phone %>"/>
+        <div class="phone error"></div>
+    
+        <label for="password">Password*</label>
+        <input class="input-form" type="password" name="password" required/>
+        <div class="password error"></div>
+    
+        <button>Save Details</button>
+    </form>
+</section>
+    <!-- footer section  -->
+    <footer>
+        <section class="footer">
+            <div class="credit"> created by <span>Group 2</span> | all rights reserved! </div>
+        </section>
+    </footer>
+</body>
+<script src="https://kit.fontawesome.com/120cd899b7.js" crossorigin="anonymous"></script>
+<script>
+    const imageForm = document.querySelector('#imageForm');
+    const detailsForm = document.querySelector('#detailsForm');
+    const fullNameError = document.querySelector('.fullName.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+    const profileImageInput = document.querySelector('input[name="profileImage"]');
+
+    // Event listener for the image form
+    imageForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('profileImage', profileImageInput.files[0]);
+
+        try {
+            const res = await fetch('/updateUserImage', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await res.json();
+            console.log(data);
+            if (data.errors) {
+                alert(data.errors.profileImage);
+            } else {
+                alert('Image updated successfully');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    });
+
+    // Event listener for the details form
+    detailsForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // reset error
+    fullNameError.textContent = '';
+    emailError.textContent = '';
+    passwordError.textContent = '';
+
+    const userDetails = {
+        fullName: detailsForm.fullName.value,
+        email: detailsForm.email.value,
+        phone: detailsForm.phone.value,
+        password: detailsForm.password.value
+    };
+
+    try {
+        const res = await fetch('/updateUserDetails', {
+            method: 'POST',
+            body: JSON.stringify(userDetails),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+        console.log(data);
+        if (data.errors) {
+            fullNameError.textContent = data.errors.fullName;
+            emailError.textContent = data.errors.email;
+            passwordError.textContent = data.errors.password;
+        } else {
+            window.location.href = '/myAccount';
+            alert('Details updated successfully');
+        }
+    } catch (err) {
+        console.log(err);
+    }
+});
+</script>
+
+</html>
