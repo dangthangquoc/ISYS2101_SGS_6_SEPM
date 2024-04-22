@@ -1,3 +1,18 @@
+:root{
+    --color-white: #ffffff;
+    --color-light: #f0eff5;
+    --color-gray-dark: #56555e;
+    --color-dark: #27282f;
+}
+
+/* after end, when js change theme */
+.dark-theme {
+    --color-white: #131316;
+    --color-light: #23232a;
+    --color-dark: #ddd;
+    --color-gray-dark: #adacb5;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -13,9 +28,9 @@ html{
     font-size: 12px;
 }
 body{
-    background: rgb(233, 231, 231);
+    background: var(--color-light);
     min-height: 100vh;
-    color: rgb(50, 43, 43);
+    color: var(--color-dark);
 }
 img{
     width: 100%;
@@ -35,13 +50,14 @@ h4{
 h5{
     font-size: 0.86rem;
     font-weight: 500;
+    color: #27282f;
 }
 h6{
     font-size: 0.6rem;
 }
 p{
     font-size: 0.86rem;
-    color: rgb(97, 92, 92);
+    color: var(--color-gray-dark);
 }
 small{
     font-weight: 300;
@@ -80,7 +96,7 @@ nav img.logo {
     height: 4rem;
 }
 nav .search-bar{
-    background: rgb(249, 244, 244);
+    background: var(--color-light);
     padding: 8px 1.6rem;
     width: 32vw;
     border-radius: 6px;
@@ -92,12 +108,12 @@ nav .search-bar{
     left: 15%;
 }
 nav .search-bar input[type="search"] {
-    color: rgb(59, 56, 56);
+    color: var(--color-dark);
     border: none;
     width: 100%;
 }
 nav .search-bar input[type="search"]::placeholder{
-    color: rgb(79, 73, 73);
+    color: var(--color-gray-dark);
 }
 nav .profile-area{
     display: flex;
@@ -107,7 +123,7 @@ nav .profile-area{
 }
 nav .profile-area .theme-btn{
     display: flex;
-    background: rgb(237, 233, 233);
+    background: var(--color-light);
     width: 5rem;
     height: 2rem;
     border-radius: 6px;
@@ -123,7 +139,7 @@ nav .profile-area .theme-btn span{
     font-size: 1.3rem;
 }
 nav .profile-area .theme-btn .active{
-    background: rgb(54, 53, 53);
+    background: var(--color-dark);
     border-radius: 6px;
     color: white;
 }
@@ -141,12 +157,15 @@ nav .profile-area .profile-photo{
 }
 nav .profile-area .profile span{
     cursor: pointer;
+    color: #27282f;
 }
 nav .profile-area button{
     border: none;
     display: none;
 }
-
+nav .profile-area button span{
+    color: #27282f;
+}
 
 /* <!-- aside --> */
 main{
@@ -212,6 +231,10 @@ main aside .updates span{
 }
 main aside .updates h4{
     margin: 1rem 0;
+    color: #27282f;
+}
+main aside .updates small{
+    color: #27282f;
 }
 main aside .updates a{
     display: block;
@@ -235,115 +258,244 @@ main section.middle .header{
     align-items: center;
     gap: 1rem;
 }
-main section.middle .header input[type="date"]{
-    padding: 0.5rem 2rem;
-    border-radius: 6px;
-    border: none;
-    background: white;
-    color: rgb(91, 87, 87);
+main.table {
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+
+    overflow: hidden;
 }
 
 
-/* <!-- monthly report --> */
-main .monthly-report{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    justify-content: space-between;
-    margin-top: 2rem;
-}
-main .monthly-report h1{
-    font-weight: 700;
-    font-size: 1.8rem;
-}
-main .monthly-report .report div{
-    cursor: pointer;
+
+.table__body {
+    width: 1300px;
+    background-color: #fffb;
+
+
+
+    overflow: auto;
+    overflow: overlay;
 }
 
 
-/* <!-- fast payment --> */
-main .fast-payment{
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
 }
-main .fast-payment .badges{
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-    min-width: 100%;
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
 }
-main .fast-payment .badges .badge span{
-    width: 7px;
-    height: 7px;
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
     border-radius: 50%;
+
+    vertical-align: middle;
 }
-main .fast-payment .badges .badge{
-    padding: 0.6rem 1.6rem;
-    background: white;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: all 0.3s ease
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
 }
-main .fast-payment .badges .badge:hover{
-    box-shadow: 0 0 1.5rem rgb(23, 23, 129);
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
     cursor: pointer;
+    text-transform: capitalize;
 }
-main .fast-payment .badges .badge:first-child span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    font-size: 1.5rem;
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
 }
-main .fast-payment .badges .badge div{
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
 }
-.bg-primary{
-    background: rgb(9, 9, 226);
-    box-shadow: 0 0.8rem 0.8rem rgb(68, 68, 249);
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
 }
-.bg-danger{
-    background: rgb(210, 8, 8);
-    box-shadow: 0 0.8rem 0.8rem rgb(247, 71, 71);
+
+tbody tr:hover {
+    background-color: #fff6 !important;
 }
-.bg-success{
-    background: green;
-    box-shadow: 0 0.8rem 0.8rem rgb(8, 198, 8);
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
 }
-.bg-purple{
-    background: purple;
-    box-shadow: 0 0.8rem 0.8rem rgb(188, 6, 188);
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
 }
-.bg-dark{
-    background: #27282f;
-    box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
-}
-.bg-purple-light{
-    background: rgb(188, 6, 188);
-}
-.bg-danger-light{
-    background: rgb(247, 71, 71);
-}
-.bg-primary-light{
-    background: rgb(68, 68, 249);
-}
-.bg-success-light{
-    background: rgb(8, 198, 8);
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
 }
 
 
-/* <!-- canvas --> */
-canvas#chart{
-    background: white;
-    min-width: 100%;
-    margin-top: 2rem;
-    border-radius: 1.6rem;
-    padding: 1.6rem;
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #6c00bd;
+}
+
+thead th:hover {
+    color: #6c00bd;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #6c00bd;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #6c00bd;
+}
+
+
+  
+
+
+/* responsive for table */
+@media screen and (max-width: 1024px){
+    nav .search-bar{
+        display: none;
+    }
+    nav .profile-area{
+        gap: 2rem;
+    }
+    nav .profile-area button#menu-btn {
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+    }
+    main{
+        grid-template-columns: 1fr;
+    }
+    main aside {
+        position: fixed;
+        top: 0;
+        /* left: 0; first to the left 0, and after JS we set -100% and below we write the animation !!! */
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100%;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        /* after main aside .updates/ */
+        display: none;
+         /* after we write the animation !!! */
+         animation: showSidebar 0.5s ease forwards;
+    }
+
+    @keyframes showSidebar {
+        to {
+            left: 0;
+        }
+    }
+
+    main aside button#close-btn{
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color: var(--color-dark);
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    main aside .sidebar{
+        margin-top: 4rem;
+    }
+    main aside .updates{
+        display: none;
+    }
+}
+
+/* responsive for mobile phones */
+
+@media screen and (max-width: 600px) {
+    nav{
+        width: 106%;
+    }
+    nav .profile-area {
+        gap: 2.6rem;
+    }
+    nav .profile h5,
+    nav .profile span {
+        display: none;
+    }
+    main section.middle .cards{
+        grid-template-columns: 1fr;
+    }
+    main section.middle .fast-payment{
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 3rem;
+        gap:  1rem;
+    }
+    main .cards{
+        margin-right: 1rem;
+    }
+    
 }
