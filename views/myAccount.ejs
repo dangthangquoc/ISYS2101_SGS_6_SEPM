@@ -1,882 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user.fullName %> Profile</title>
+    <title>Main Page</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="../frontend/css/myAccount.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="/images/material/favicon-removebg-preview1.png">
+
 </head>
-
 <body>
-    <!-- header section starts  -->
 
-    <header class="header">
-
-        <section class="header-1">
-
-            <a href="/" class="logo"> <i class="fas fa-play"></i> playbook </a>
-
-            <form action="/searchResult" method="get" class="search-form">
-                <input type="search" name="query" placeholder="search here..." id="search-box">
-                <label for="search-box" class="fas fa-search" id="search-icon"></label>
-                <input type="submit" style="display: none;">
-            </form>
-
-            <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
-                <% if (user) { %>
-                    <% if (!user.isAdmin) { %>
-                        <a href="/wishlist" class="fas fa-heart"></a>
-                        <a href="/userReservations" class="fas fa-list"></a>
-                    <% } else { %>
-                        <a href="/dashboard" class="fas fa-tachometer-alt"></a>
-                    <% } %>
-                    <a href="/myAccount" class="fas fa-user"></a>
-                <%} else { %>
-                    <a href="/login" class="fas fa-heart"></a>
-                    <a href="/login" class="fas fa-list"></a>
-                    <a href="/login" class="fas fa-user"></a>
-                <%} %>
+    <!-- navbar -->
+    <nav>
+        <div class="container">
+            <img src="../frontend/images/fsrs.png" class="logo" alt="logo">
+            <div class="search-bar">
+                <span class="material-icons-sharp">search</span>
+                <input type="search" placeholder="Search">
             </div>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile-photo">
+                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %>'s Profile Picture">
+                </div>
+                <div class="profile">
+                    <h5><%= fullName %></h5>
+                    <span class="material-icons-sharp">expand_more</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
+    <!-- main -->
 
-        </section>
+    <main>
 
-    </header>
+        <!-- aside -->
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons-sharp">close</span>
+            </button>
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">currency_exchange</span>
+                    <h4>Market</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">pie_chart</span>
+                    <h4>Analytics</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">help_center</span>
+                    <h4>Help Center</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h4>Settings</h4>
+                </a>
+            </div>
+            <div class="updates">
+                <span class="material-icons-sharp">update</span>
+                <h4>Updates Available</h4>
+                <small>Security Updates</small>
+                <small>General Updates</small>
+                <a href="#">Update Now</a>
+            </div>
+        </aside>
 
-    <!-- header section ends -->
-
-    <!-- Divert between admin and user -->
-    <% if (user && user.isAdmin) { %>
+        <!--Middle Section-->
         <div class="main-part">
             <!-- Right Half - General Information, Contact Information, Profile Image, and Name -->
             <div class="leftContainer">
                 <div id="tab1" class="tab-content tab1 active">
                     <div class="text-center">
                         <img src="<%= user.profileImage %>" alt="Profile Picture" class="profilePic" id="profilePic">
-                        <a href="/updateUser"><button id="editBtn">Edit Profile</button></a>
-                        <!-- <a href="/category"><button id="editBtn">Category</button></a> -->
+                        <a href="/updateUser"><button id="editBtn">Edit Profile</button></a> 
                     </div>
                     <div class="generalInfo">
                         <h3 class="heading">General Information</h3>
                         <ul id="generalInfoList">
                             <li>Full Name: <span id="fullName"><%= user.fullName %></span></li>
+                            <!-- <li>Date of Birth: <span id="dob">January 1, 1990</span></li> -->
+                            <!-- <li>Gender: <span id="gender">Male</span></li> -->
                             <li>Email Address: <span id="email"><%= user.email %></span></li>
                             <li>Phone Number: <span id="phone"><%= user.phone %></span></li>
                         </ul>
                     </div>
                 </div>
-                <!-- Tab Content inside leftContainer -->
-                <div id="tab2" class="tab-content tab2">
-                    <div id="searchInputContainer">
-                        <input type="text" id="searchInputreservation" placeholder="Search here...">
-                        <i id="searchIcon" class="fa fa-search"></i>
-                    </div>
-                    <% let reservationTransactions = transactions.filter(transaction => transaction.status == 'Pending'); %>
-                        <table id="bookTable" class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>User</th>
-                                    <th>Book</th>
-                                    <th>Status</th>
-                                    <th>Pick Up Date</th>
-                                    <th>Return Date</th>
-                                    <th>Fine</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% reservationTransactions.forEach((transaction, index) => { %>
-                                    <tr>
-                                        <td class="searchablereservation"><%= index + 1 %></td>
-                                        <td class="searchablereservation"><%= transaction.userEmail %></td>
-                                        <td class="searchablereservation"><%= transaction.bookTitle %></td>
-                                        <td class="searchablereservation"><%= transaction.status %></td>
-                                        <td class="searchablereservation"><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                        <td class="searchablereservation"><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                        <td class="searchablereservation"><%= transaction.fine %> $</td>
-                                        <td class="searchablereservation"><button class="borrow-button delete-btn" data-id="<%= transaction._id %>">Borrow</button></td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table> <!-- End of table-->
-                </div>
-                <!-- Tab Content inside leftContainer -->
-                <div id="tab3" class="tab-content tab3">
-                    <div id="searchInputContainer">
-                        <input type="text" id="searchInputborrow" placeholder="Search here...">
-                        <i id="searchIcon" class="fa fa-search"></i>
-                    </div>
-                    <% let currentTransactions = transactions.filter(transaction => transaction.status !== 'Returned' && transaction.status !== 'Pending'); %>
-                        <table id="bookTable" class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>User</th>
-                                    <th>Book</th>
-                                    <th>Status</th>
-                                    <th>Pick Up Date</th>
-                                    <th>Return Date</th>
-                                    <th>Fine</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% currentTransactions.forEach((transaction, index) => { %>
-                                    <tr>
-                                        <td class="searchableborrow"><%= index + 1 %></td>
-                                        <td class="searchableborrow"><%= transaction.userEmail %></td>
-                                        <td class="searchableborrow"><%= transaction.bookTitle %></td>
-                                        <td class="searchableborrow"><%= transaction.status %></td>
-                                        <td class="searchableborrow"><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                        <td class="searchableborrow"><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                        <td class="searchableborrow"><%= transaction.fine %> $</td>
-                                        <td class="searchableborrow"><button class="return-button delete-btn" data-id="<%= transaction._id %>">Return</button></td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table><!-- End of table-->
-                </div>
-                <!-- Tab Content inside leftContainer -->
-                <div id="tab4" class="tab-content tab4">
-                    <div id="searchInputContainer">
-                        <input type="text" id="searchInputreturn" placeholder="Search here...">
-                        <i id="searchIcon" class="fa fa-search"></i>
-                    </div>
-                    <% let returnedTransactions = transactions.filter(transaction => transaction.status == 'Returned'); %>
-                        <table id="bookTable" class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>User</th>
-                                    <th>Book</th>
-                                    <th>Status</th>
-                                    <th>Pick Up Date</th>
-                                    <th>Return Date</th>
-                                    <th>Fine</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% returnedTransactions.forEach((transaction, index) => { %>
-                                    <tr>
-                                        <td class="searchablereturn"><%= index + 1 %></td>
-                                        <td class="searchablereturn"><%= transaction.userEmail %></td>
-                                        <td class="searchablereturn"><%= transaction.bookTitle %></td>
-                                        <td class="searchablereturn"><%= transaction.status %></td>
-                                        <td class="searchablereturn"><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                        <td class="searchablereturn"><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                        <td class="searchablereturn"><%= transaction.fine %> $</td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table><!-- End of table-->
-                </div>
-                <div id="tab5" class="tab-content tab5">
-                    <div id="searchInputContainer">
-                        <input type="text" id="searchInputauthor" placeholder="Search here...">
-                        <i id="searchIcon" class="fa fa-search"></i>
-                    </div>
-                    <% if (authors.length === 0) { %>
-                        <table class="styled-table">
-                            <tr>
-                                <td>You don't have any author</td>
-                            </tr>
-                        </table>
-                    <% } else { %>
-                        <table class="styled-table"> <!-- Start of table-->
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Author Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% authors.forEach(async (author, index) => { %>
-                                <tr>
-                                    <td class="searchableauthor"><%= index + 1 %></td>
-                                    <td class="searchableauthor"><%= author.name %></td>
-                                    <% if (author.book.length === 0) { %>
-                                        <td class="searchableauthor"><button class="delete-btn author-remove" data-id="<%= author._id %>">Delete</button></td>
-                                    <% } else { %>
-                                        <td class="searchableauthor">This Author is populated</td>
-                                    <% } %>
-                                </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    <% } %> <!-- End of table-->
-                    <div class="wishlist-btn-container">
-                        <button class="addBtn" onclick="openAuthorForm()">Add Author</button>
-                        <!-- <a href="/author"><button class="addBtn">Add Author</button></a> -->
-                    </div>
-                </div>
-                <!-- Popup Form for Author -->
-                <div id="authorForm" class="authorForm">
-                    <div class="popup-content">
-                        <form id="addauthorinfor">
-                            <span class="close" onclick="closeAuthorForm()">&times;</span>
-                            <label for="authorName">Author Name:</label>
-                            <input type="text" id="authorName" name="authorName" required>
-                            <div class="authorName error"></div>
-                            <button class="addBtn" type="submit">Add Author</button>
-                        </form>
-                    </div>
-                </div>
-                <div id="tab6" class="tab-content tab6">
-                    <div id="searchInputContainer">
-                        <input type="text" id="searchInputpublisher" placeholder="Search here...">
-                        <i id="searchIcon" class="fa fa-search"></i>
-                    </div>
-                    <% if (publishers.length === 0) { %>
-                        <table class="styled-table">
-                            <tr>
-                                <td>You don't have any publisher</td>
-                            </tr>
-                        </table>
-                    <% } else { %>
-                        <table class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Publisher Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% publishers.forEach((publisher, index) => { %>
-                                <tr>
-                                    <td class="searchablepublisher"><%= index + 1 %></td>
-                                    <td class="searchablepublisher"><%= publisher.name %></td>
-                                    <% if (publisher.book.length === 0) { %>
-                                        <td class="searchablepublisher"><button class="delete-btn publisher-remove" data-id="<%= publisher._id %>">Delete</button></td>
-                                    <% } else { %>
-                                        <td class="searchablepublisher">This Publisher is populated</td>
-                                    <% } %>
-                                </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    <% } %> <!-- End of table-->
-                    <div class="wishlist-btn-container">
-                        <button class="addBtn" onclick="openPublisherForm()">Add Publisher</button>
-                        <!-- <a href="/publisher"><button class="addBtn">Add Publisher</button></a> -->
-                    </div>
-                </div>
-                <!-- Popup Form -->
-                <div id="publisherForm" class="publisherForm">
-                    <div class="popup-content">
-                        <form id="addpublisherinfor">
-                            <span class="close" onclick="closePublisherForm()">&times;</span>
-                            <label for="publisherName">Publisher Name:</label>
-                            <input type="text" id="publisherName" name="publisherName" required>
-                            <div class="publisherName error"></div>
-                            <button class="addBtn" type="submit">Add Publisher</button>
-                        </form>
-                    </div>
-                </div>
-                <div id="tab7" class="tab-content tab7">
-                    <div class="form-container">
-                        <form class="librarian-form" id="librarianForm">
-                            <h1>Create Account</h1>
-                            <input type="text" id="librarianName" placeholder="Name" required>
-                            <input type="email" id="librarianEmail" placeholder="Email" required>
-                            <input type="password" id="password" placeholder="Password" required>
-                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-                            <button class="addBtn" id="addLibrarianBtn">Add Librarian</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div id="popup" class="popup">
-                    <div class="popup-content">
-                        <span class="close" onclick="closePopup()">&times;</span>
-                        <h1>Are you sure you want to log out?</h1>
-                        <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
-                        <button class="no" onclick="closePopup()">No</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Left Half - vertical Navbar -->
-            <div class="rightContainer">
-                <ul class="verticalNavList">
-                    <li class="verticalNavItems active" onclick="openTab('tab1')"><i class="far fa-user"></i><a
-                            href="#">Profile</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab2')"><i class="fa-solid fa-book"></i><a href="#">All
-                            Reservation</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab3')"><i class="fa-solid fa-book"></i><a href="#">All
-                            Borrowing Book</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab4')"><i class="fa-solid fa-book"></i><a href="#">All
-                            Past Reservation</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab5')"><i class="fa-solid fa-pen"></i><a href="#">All
-                            Author</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab6')"><i class="fa-regular fa-building"></i></i><a
-                            href="#">All Publisher</a></li>
-                    <li class="verticalNavItems" onclick="openTab('tab7')"><i class="fa-solid fa-network-wired"></i></i><a
-                            href="#">Add Libraian</a></li>
-                    <li id="logout-btn" class="verticalNavItems" onclick="openPopup()"><i
-                            class="fas fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
-                </ul>
-            </div>
-        </div>
+            
     
-        <!-- footer -->
-        <footer>
-            <section class="footer">
-                <div class="credit"> created by <span>Group 2</span> | all rights reserved! </div>
-            </section>
-        </footer>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Normal User Profile -->
-
-    <% } else { %>
-    <!-- Main Body -->
-    <div class="main-part">
-        <!-- Right Half - General Information, Contact Information, Profile Image, and Name -->
-        <div class="leftContainer">
-            <div id="tab1" class="tab-content tab1 active">
-                <div class="text-center">
-                    <img src="<%= user.profileImage %>" alt="Profile Picture" class="profilePic" id="profilePic">
-                    <a href="/updateUser"><button id="editBtn">Edit Profile</button></a> 
-                </div>
-                <div class="generalInfo">
-                    <h3 class="heading">General Information</h3>
-                    <ul id="generalInfoList">
-                        <li>Full Name: <span id="fullName"><%= user.fullName %></span></li>
-                        <!-- <li>Date of Birth: <span id="dob">January 1, 1990</span></li> -->
-                        <!-- <li>Gender: <span id="gender">Male</span></li> -->
-                        <li>Email Address: <span id="email"><%= user.email %></span></li>
-                        <li>Phone Number: <span id="phone"><%= user.phone %></span></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Tab Content inside leftContainer -->
-            <div id="tab2" class="tab-content tab2">
-                
-                <table class="styled-table">
-                    <% if (books && books.length > 0) { %>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Book Name</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% books.forEach((book, index) => { %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><a href="/bookDetail/<%= book._id %>"><%= book.title %></a></td>
-                                <td><%= book.bookStatus %></td>
-                                <td><form class="removeBookForm" method="post" action="/removeFromWishlist" data-book-id="<%= book._id %>">
-                                    <button type="submit" class="remove-btn">Remove</button>
-                                </form></td>
-                                <!-- <td><span class="remove-btn">Remove</span></td> -->
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                    <% } else { %>
-                        <tr>
-                            <td>You don't have any wishlist</td>
-                        </tr>
-                    <% } %>
-                </table>
-                <% if (books && books.length > 0) { %>
-                <div class="wishlist-btn-container">
-                    <a href="/wishlist"><button id="wishlist-btn">More detail</button></a>
-                    <button id="clear-btn" onclick="clearFavoriteBooks()">Clear Wishlist</button>
-                </div>
-                <% } else { %>
-                    <!-- Show nothing -->
-                <% } %>
-            </div>
-            <div id="tab3" class="tab-content tab3">
-                <div class="table-container">
-                    <% if (Array.isArray(allActiveTransactions) && allActiveTransactions.length > 0) { %>
-                    <% let hasPending = false; %>
-                    <% allActiveTransactions.forEach((transaction, index) => { %>
-                    <% if (transaction.status === 'Pending') { %>
-                    <% hasPending = true; %>
-                    <% } %>
-                    <% }); %>
-                    <% if (hasPending) { %>
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Book Title</th>
-                                <th>Borrowed Date</th>
-                                <th>Due Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% allActiveTransactions.forEach((transaction, index) => { %>
-                            <% if (transaction.status === 'Pending') { %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><%= transaction.bookTitle %></td>
-                                <td><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                <td><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                <td><%= transaction.status %></td>
-                            </tr>
-                            <% } %>
-                            <% }); %>
-                        </tbody>
-                        <% } %>
-                    </table>
-                    <% } else { %>
-                        <table class="styled-table">
-                            <tr>
-                                <td>You don't have any Pending Reservation</td>
-                            </tr>
-                        </table>
-                    <% } %>
-                </div>
-            </div>
-            <div id="tab4" class="tab-content tab4">
-                <div class="table-container">
-                    <table class="styled-table">
-                        <% if (Array.isArray(allActiveTransactions) && allActiveTransactions.length > 0) { %>
-                        <% let hasBorrowing = false; %>
-                        <% allActiveTransactions.forEach((transaction, index) => { %>
-                        <% if (transaction.status !== 'Pending') { %>
-                        <% hasBorrowing = true; %>
-                        <% } %>
-                        <% }); %>
-                        <% if (hasBorrowing) { %>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Book Title</th>
-                                <th>Borrowed Date</th>
-                                <th>Due Date</th>
-                                <th>Status</th>
-                                <th>Fine</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% allActiveTransactions.forEach((transaction, index) => { %>
-                            <% if (transaction.status !== 'Pending') { %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><%= transaction.bookTitle %></td>
-                                <td><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                <td><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                <td><%= transaction.status %></td>
-                                <td><%= transaction.fine %> $</td>
-                            </tr>   
-                            <% } %>
-                            <% }); %>
-                        </tbody>
-                        <% } %>
-                    </table>
-                    <% } else { %>
-                        <table class="styled-table">
-                            <tr>
-                                <td>You don't have any Borrowing Book</td>
-                            </tr>
-                        </table>
-                    <% } %>
-                </div>
-            </div>
-            <div id="tab5" class="tab-content tab5">
-                <div class="table-container">
-                    <table class="styled-table">
-                        <% if (Array.isArray(allPrevTransactions) && allPrevTransactions.length > 0) { %>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Book Title</th>
-                                <th>Borrowed Date</th>
-                                <th>Due Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% allPrevTransactions.forEach((transaction, index) => { %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><%= transaction.bookTitle %></td>
-                                <td><%= new Date(transaction.pickUpDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) %></td>
-                                <td><%= new Date(transaction.returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
-                                <td><%= transaction.status %></td>
-                            </tr>
-                            <% }); %>
-                        </tbody>
-                        <% } else { %>
-                        <tr>
-                            <td>You don't have any Borrow History</td>
-                        <% } %>
-                    </table>
-                </div>
-            </div>
-            <div id="popup" class="popup">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup()">&times;</span>
-                    <h1>Are you sure you want to log out?</h1>
-                    <!-- <button class="yes" href="/logout" onclick="logout()">Yes</button> -->
-                    <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
-                    <button class="no" onclick="closePopup()">No</button>
-                </div>
-            </div>
-        </div>
-        <!-- Left Half - vertical Navbar -->
-        <div class="rightContainer">
-            <ul class="verticalNavList">
-                <li class="verticalNavItems active" onclick="openTab('tab1')"><i class="far fa-user"></i><a
-                        href="#">Profile</a></li>
-                <li class="verticalNavItems" onclick="openTab('tab2')"><i class="far fa-bookmark"></i><a
-                        href="#">Wishlist</a></li>
-                <li class="verticalNavItems" onclick="openTab('tab3')"><i class="fa-solid fa-clock"></i><a
-                    href="#">Pending Book</a></li>
-                <li class="verticalNavItems" onclick="openTab('tab4')"><i class="fa-solid fa-book"></i><a
-                    href="#">Borrowing Book</a></li>
-                <li class="verticalNavItems" onclick="openTab('tab5')"><i class="fa-regular fa-clock"></i><a
-                    href="#">Borrowed History</a></li>
-                <li id="logout-btn" class="verticalNavItems" onclick="openPopup()"><i
-                        class="fas fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- footer -->
-    <footer>
-        <section class="footer">
-            <div class="credit"> created by <span>Group 2</span> | all rights reserved! </div>
-        </section>
-    </footer>
-    <% } %>
-
-    <script src="/js/script.js"></script>
-    <script src="/js/profile.js"></script>
-    <script src="https://kit.fontawesome.com/120cd899b7.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</body>
-
-<!-- add librarian -->
-<script>
-    document.addEventListener('click', async function(event) {
-        if (event.target.id === 'addLibrarianBtn') {
-            event.preventDefault();
-    
-            const fullName = document.getElementById('librarianName').value;
-            const email = document.getElementById('librarianEmail').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-    
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
+    <!-- add librarian -->
+    <script>
+        document.addEventListener('click', async function(event) {
+            if (event.target.id === 'addLibrarianBtn') {
+                event.preventDefault();
+        
+                const fullName = document.getElementById('librarianName').value;
+                const email = document.getElementById('librarianEmail').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+        
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+        
+                try {
+                    const res = await fetch('/create-librarian-account', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ fullName: fullName, email: email, password: password }),
+                    });
+                    const data = await res.json();
+                    if (data.error) {
+                        let errorMessage = '';
+                        if (data.error.includes('E11000 duplicate key error')) {
+                            errorMessage += 'This email is already registered';
+                        }
+                        if (data.error.includes('Minimum password length is 6 characters')) {
+                            errorMessage += 'Password must be at least 6 characters';
+                        }
+                        alert(errorMessage);
+                    }
+        
+                    if (data.user) {  
+                        alert('Librarian account created successfully');
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
             }
+        });
+        </script>
     
-            try {
-                const res = await fetch('/create-librarian-account', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+    <!-- refresh prevention when remove book from wishlist -->
+    <script>
+        $(document).ready(function() {
+            $('.removeBookForm').submit(function(e) {
+                e.preventDefault();
+    
+                var $form = $(this);
+                var bookId = $form.attr('action').split('/').pop();
+    
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'post',
+                    success: function() {
+                        // Remove the parent tr of the form that was submitted
+                        $form.closest('tr').remove();
                     },
-                    body: JSON.stringify({ fullName: fullName, email: email, password: password }),
+                    error: function() {
+                        // Handle error here. For example, you can show an error message.
+                    }
                 });
-                const data = await res.json();
-                if (data.error) {
-                    let errorMessage = '';
-                    if (data.error.includes('E11000 duplicate key error')) {
-                        errorMessage += 'This email is already registered';
-                    }
-                    if (data.error.includes('Minimum password length is 6 characters')) {
-                        errorMessage += 'Password must be at least 6 characters';
-                    }
-                    alert(errorMessage);
-                }
-    
-                if (data.user) {  
-                    alert('Librarian account created successfully');
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    });
-    </script>
-
-<!-- refresh prevention when remove book from wishlist -->
-<script>
-    $(document).ready(function() {
-        $('.removeBookForm').submit(function(e) {
-            e.preventDefault();
-
-            var $form = $(this);
-            var bookId = $form.attr('action').split('/').pop();
-
-            $.ajax({
-                url: $form.attr('action'),
-                type: 'post',
-                success: function() {
-                    // Remove the parent tr of the form that was submitted
-                    $form.closest('tr').remove();
-                },
-                error: function() {
-                    // Handle error here. For example, you can show an error message.
-                }
             });
         });
-    });
-</script>
-
-<!-- remove all wishlist -->
-<script>
-    async function clearFavoriteBooks() {
-        try {
-            const response = await fetch('/clearWishlist', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            // Clear the favorite books on the page
-            const favoriteBooksElement = document.getElementById('tab2');
-            if (favoriteBooksElement) {
-                while (favoriteBooksElement.firstChild) {
-                    favoriteBooksElement.removeChild(favoriteBooksElement.firstChild);
-                }
-
-                // Add a message indicating that there are no favorite books
-                const messageElement = document.createElement('p');
-                messageElement.textContent = 'All books have been removed from the wishlist.';
-                favoriteBooksElement.appendChild(messageElement);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-</script>
-
-<!-- Reserved to Borrowing -->
-<script>
-    document.querySelectorAll('.borrow-button').forEach(button => {
-      button.addEventListener('click', function() {
-        const transactionId = this.getAttribute('data-id');
-        console.log('transactionId:', transactionId);
-
-        // Update the status cell in the row
-        const row = this.parentElement.parentElement;
-        const statusCell = row.children[3]; // The status cell is the 4rd cell in the row
-        statusCell.innerText = 'Borrowed'; // Change 'Returned' to 'Borrowed'
-        
-        // Remove the borrow button
-        this.remove(); // Change this to remove only the button
-
-        // Move the row to the "Finished Reservation" table
-        const finishedTable = document.querySelectorAll('table')[1].querySelector('tbody'); // The finished table is the 2nd table in the document
-        finishedTable.appendChild(row);
-
-        fetch(`/reservations/borrow`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ transactionId: transactionId }),
-        })
-        .then(response => response.text()) // Change this to response.text() if the server is sending a string
-        .then(data => {
-            console.log(data);
-            if (data === 'Transaction was saved') { // Check if the server response is 'Transaction was saved'
-                console.log('Successfully borrowed transaction');
-            } else {
-                console.error('Failed to borrow transaction');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-      });
-    });
-</script>
-
-<!-- borrowing to past reservation -->
-<script>
-    document.querySelectorAll('.return-button').forEach(button => {
-      button.addEventListener('click', function() {
-        const transactionId = this.getAttribute('data-id');
-        console.log('transactionId:', transactionId);
+    </script>
     
-        fetch(`/reservations/return`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id: transactionId }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
+    <!-- remove all wishlist -->
+    <script>
+        async function clearFavoriteBooks() {
+            try {
+                const response = await fetch('/clearWishlist', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+    
+                // Clear the favorite books on the page
+                const favoriteBooksElement = document.getElementById('tab2');
+                if (favoriteBooksElement) {
+                    while (favoriteBooksElement.firstChild) {
+                        favoriteBooksElement.removeChild(favoriteBooksElement.firstChild);
+                    }
+    
+                    // Add a message indicating that there are no favorite books
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = 'All books have been removed from the wishlist.';
+                    favoriteBooksElement.appendChild(messageElement);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+    
+    <!-- Reserved to Borrowing -->
+    <script>
+        document.querySelectorAll('.borrow-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const transactionId = this.getAttribute('data-id');
+            console.log('transactionId:', transactionId);
+    
             // Update the status cell in the row
             const row = this.parentElement.parentElement;
             const statusCell = row.children[3]; // The status cell is the 4rd cell in the row
-            statusCell.innerText = 'Returned';
+            statusCell.innerText = 'Borrowed'; // Change 'Returned' to 'Borrowed'
             
-            // Remove the return button
-            this.parentElement.remove();
-  
+            // Remove the borrow button
+            this.remove(); // Change this to remove only the button
+    
             // Move the row to the "Finished Reservation" table
-            const finishedTable = document.querySelectorAll('table')[2].querySelector('tbody'); // The finished table is the 3nd table in the document
+            const finishedTable = document.querySelectorAll('table')[1].querySelector('tbody'); // The finished table is the 2nd table in the document
             finishedTable.appendChild(row);
-            console.log('Successfully returned transaction');
-          } else {
-            console.error('Failed to return transaction');
-          }
-        })
-        .catch(error => console.error('Error:', error));
-      });
-    });
-</script>
-<!-- add author popup -->
-<script>
-    const addauthorinfor = document.querySelector('#addauthorinfor');
-    const authorNameError = document.querySelector('.authorName.error');
-    addauthorinfor.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const name = addauthorinfor.authorName.value;
-
-        try {
-            const res = await fetch('/author', {
-                method: 'POST',
-                body: JSON.stringify({ name }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data.errors) {
-                authorNameError.textContent = data.errors.name;
-            }
-            else {
-                authorNameError.textContent = ('Added successfully');
-            }
-        }
-        catch (err) {
-            console.log(err);
-        }
-    });
-</script>
-
-<!-- add publisher popup -->
-<script>
-    const addpublisherinfor = document.querySelector('#addpublisherinfor');
-    const publisherNameError = document.querySelector('.publisherName.error');
-    addpublisherinfor.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const name = addpublisherinfor.publisherName.value;
-
-        try{
-            const res = await fetch('/publisher', {
-                method: 'POST',
-                body: JSON.stringify({ name }),
-                headers: { 'Content-Type': 'application/json'}
-            });
-            const data = await res.json();
-            console.log(data);
-            if (data.errors){
-                publisherNameError.textContent = data.errors.name;
-            }
-            else{
-                publisherNameError.textContent = ('Added successfully');
-            }
-        }
-        catch (err){
-            console.log(err);
-        }
-    });
-</script>
-
-    <!-- Delete author -->
-    <script>
-    $(document).ready(function() {
-        $('.author-remove').click(function(event) {
-            event.preventDefault();
-            const row = $(this).closest('tr');
-            const authorId = $(this).data('id');
-            $.ajax({
-                url: '/deleteAuthor/' + authorId,
-                type: 'POST',
-                success: function(response) {
-                    row.remove();
+    
+            fetch(`/reservations/borrow`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ transactionId: transactionId }),
+            })
+            .then(response => response.text()) // Change this to response.text() if the server is sending a string
+            .then(data => {
+                console.log(data);
+                if (data === 'Transaction was saved') { // Check if the server response is 'Transaction was saved'
+                    console.log('Successfully borrowed transaction');
+                } else {
+                    console.error('Failed to borrow transaction');
                 }
-            });
+            })
+            .catch(error => console.error('Error:', error));
+          });
         });
-    });
     </script>
-
-    <!-- Delete publisher -->
+    
+    <!-- borrowing to past reservation -->
     <script>
+        document.querySelectorAll('.return-button').forEach(button => {
+          button.addEventListener('click', function() {
+            const transactionId = this.getAttribute('data-id');
+            console.log('transactionId:', transactionId);
+        
+            fetch(`/reservations/return`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id: transactionId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Update the status cell in the row
+                const row = this.parentElement.parentElement;
+                const statusCell = row.children[3]; // The status cell is the 4rd cell in the row
+                statusCell.innerText = 'Returned';
+                
+                // Remove the return button
+                this.parentElement.remove();
+      
+                // Move the row to the "Finished Reservation" table
+                const finishedTable = document.querySelectorAll('table')[2].querySelector('tbody'); // The finished table is the 3nd table in the document
+                finishedTable.appendChild(row);
+                console.log('Successfully returned transaction');
+              } else {
+                console.error('Failed to return transaction');
+              }
+            })
+            .catch(error => console.error('Error:', error));
+          });
+        });
+    </script>
+    <!-- add author popup -->
+    <script>
+        const addauthorinfor = document.querySelector('#addauthorinfor');
+        const authorNameError = document.querySelector('.authorName.error');
+        addauthorinfor.addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = addauthorinfor.authorName.value;
+    
+            try {
+                const res = await fetch('/author', {
+                    method: 'POST',
+                    body: JSON.stringify({ name }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors) {
+                    authorNameError.textContent = data.errors.name;
+                }
+                else {
+                    authorNameError.textContent = ('Added successfully');
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+    
+    <!-- add publisher popup -->
+    <script>
+        const addpublisherinfor = document.querySelector('#addpublisherinfor');
+        const publisherNameError = document.querySelector('.publisherName.error');
+        addpublisherinfor.addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = addpublisherinfor.publisherName.value;
+    
+            try{
+                const res = await fetch('/publisher', {
+                    method: 'POST',
+                    body: JSON.stringify({ name }),
+                    headers: { 'Content-Type': 'application/json'}
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors){
+                    publisherNameError.textContent = data.errors.name;
+                }
+                else{
+                    publisherNameError.textContent = ('Added successfully');
+                }
+            }
+            catch (err){
+                console.log(err);
+            }
+        });
+    </script>
+    
+        <!-- Delete author -->
+        <script>
         $(document).ready(function() {
-            $('.publisher-remove').click(function(event) {
+            $('.author-remove').click(function(event) {
                 event.preventDefault();
-
                 const row = $(this).closest('tr');
-                const publisherId = $(this).data('id');
+                const authorId = $(this).data('id');
                 $.ajax({
-                    url: '/deletePublisher/' + publisherId,
+                    url: '/deleteAuthor/' + authorId,
                     type: 'POST',
                     success: function(response) {
                         row.remove();
@@ -885,103 +364,124 @@
             });
         });
         </script>
-
-    <!-- Search -->
-    <script>
-        document.getElementById('searchInputreservation').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#bookTable tbody tr');
     
-            rows.forEach(row => {
-                const cells = Array.from(row.getElementsByClassName('searchablereservation'));
-                const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+        <!-- Delete publisher -->
+        <script>
+            $(document).ready(function() {
+                $('.publisher-remove').click(function(event) {
+                    event.preventDefault();
     
-                if (cellText.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+                    const row = $(this).closest('tr');
+                    const publisherId = $(this).data('id');
+                    $.ajax({
+                        url: '/deletePublisher/' + publisherId,
+                        type: 'POST',
+                        success: function(response) {
+                            row.remove();
+                        }
+                    });
+                });
             });
-        });
-    </script>
-    <script>
-        document.getElementById('searchInputborrow').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#bookTable tbody tr');
-
-            rows.forEach(row => {
-                const cells = Array.from(row.getElementsByClassName('searchableborrow'));
-                const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-
-                if (cellText.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById('searchInputreturn').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#bookTable tbody tr');
-
-            rows.forEach(row => {
-                const cells = Array.from(row.getElementsByClassName('searchablereturn'));
-                const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-
-                if (cellText.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById('searchInputauthor').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.styled-table tbody tr');
-
-            rows.forEach(row => {
-                const cells = Array.from(row.getElementsByClassName('searchableauthor'));
-                const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-
-                if (cellText.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById('searchInputpublisher').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.styled-table tbody tr');
+            </script>
     
-            rows.forEach(row => {
-                const cells = Array.from(row.getElementsByClassName('searchablepublisher'));
-                const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-    
-                if (cellText.includes(searchValue)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+        <!-- Search -->
+        <script>
+            document.getElementById('searchInputreservation').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#bookTable tbody tr');
+        
+                rows.forEach(row => {
+                    const cells = Array.from(row.getElementsByClassName('searchablereservation'));
+                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+        
+                    if (cellText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
             });
+        </script>
+        <script>
+            document.getElementById('searchInputborrow').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#bookTable tbody tr');
+    
+                rows.forEach(row => {
+                    const cells = Array.from(row.getElementsByClassName('searchableborrow'));
+                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+    
+                    if (cellText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.getElementById('searchInputreturn').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#bookTable tbody tr');
+    
+                rows.forEach(row => {
+                    const cells = Array.from(row.getElementsByClassName('searchablereturn'));
+                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+    
+                    if (cellText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.getElementById('searchInputauthor').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('.styled-table tbody tr');
+    
+                rows.forEach(row => {
+                    const cells = Array.from(row.getElementsByClassName('searchableauthor'));
+                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+    
+                    if (cellText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+        <script>
+            document.getElementById('searchInputpublisher').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('.styled-table tbody tr');
+        
+                rows.forEach(row => {
+                    const cells = Array.from(row.getElementsByClassName('searchablepublisher'));
+                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+        
+                    if (cellText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    
+    <script>
+        // Get the search icon and form elements
+        const searchIcon = document.getElementById('search-icon');
+        const searchForm = document.querySelector('.search-form');
+    
+        // Add a click event listener to the search icon
+        searchIcon.addEventListener('click', function() {
+            // Submit the form when the search icon is clicked
+            searchForm.submit();
         });
     </script>
-
-<script>
-    // Get the search icon and form elements
-    const searchIcon = document.getElementById('search-icon');
-    const searchForm = document.querySelector('.search-form');
-
-    // Add a click event listener to the search icon
-    searchIcon.addEventListener('click', function() {
-        // Submit the form when the search icon is clicked
-        searchForm.submit();
-    });
-</script>
+    <script src="simpleScript.js"></script>
+</body>
 </html>
