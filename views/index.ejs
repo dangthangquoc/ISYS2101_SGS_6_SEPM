@@ -26,20 +26,6 @@
             </div>
             <% if (user) { %>
             <div class="profile-area">
-                <div class="theme-btn">
-                    <span class="material-icons-sharp active">light_mode</span>
-                    <span class="material-icons-sharp">dark_mode</span>
-                </div>
-                <div class="profile-photo">
-                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
-                </div>
-                <div class="profileName">
-                    <h3> <%= user.fullName %> </h3>
-                </div>
-                <div class="profile">
-                    <span class="material-icons-sharp">expand_more</span>
-                </div>
-                
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
@@ -64,6 +50,22 @@
                 <span class="material-icons-sharp">close</span>
             </button>
             <div class="sidebar">
+                <% if (user) { %>
+                    <div class="profile-area">
+                        <div class="profile-photo">
+                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                        </div>
+                        <div class="profileName">
+                            <h3> <%= user.fullName %> </h3>
+                        </div>
+                    </div>
+                    <%} else { %>
+                        <a href="/login" class="">
+                            <span class="material-symbols-outlined">
+                                login
+                            </span>
+                        </a>
+                    <%} %>
                 <a href="#" class="active">
                     <span class="material-icons-sharp">dashboard</span>
                     <h4>Dashboard</h4>
@@ -88,13 +90,6 @@
                     <span class="material-icons-sharp">logout</span>
                     <h4>Logout</h4>
                 </a>
-            </div>
-            <div class="updates">
-                <span class="material-icons-sharp">update</span>
-                <h4>Updates Available</h4>
-                <small>Security Updates</small>
-                <small>General Updates</small>
-                <a href="#">Update Now</a>
             </div>
             <div id="popup" class="popup">
                 <div class="popup-content">
@@ -316,6 +311,6 @@
 
 
 
-    <script src="simpleScript.js"></script>
+    <script src="js/simpleScript.js"></script>
 </body>
 </html>
