@@ -12,9 +12,12 @@ const Agenda = require('agenda');
 
 // Importing routes
 const authRoutes = require('./routes/authRoutes');
+const playerRoutes = require('./routes/playerRoutes');
 
 // Importing middleware
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { getUserById, getPlayerById } = require('./middleware/nameMiddleware');
+
 
 // Importing models
 const User = require('./models/user');
@@ -51,6 +54,8 @@ app.use(
 
 // Setting up routes
 app.use(authRoutes);
+app.use(playerRoutes);
+
 
 // Database Connection
 const mongoURI = 'mongodb+srv://sepm:sepm123@cluster0.uuar0ah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
@@ -77,7 +82,29 @@ const userImgStorage = multer.diskStorage({
 
 const userImgUpload = multer({ storage: userImgStorage });
 
+// Route for all types of users
+app.get('/', checkUser, async (req,res) => {
+  try {
+    // Fetch all authors, categories, and publishers from the database
+    const team = await Team.find();
+  
+    // Fetch all books and populate their author, category, and publisher fields
+    let player = await Player.find().populate('team');
+  
+    // Render the index page with the fetched data
+    res.render('index', { player, team});
+  
+  } catch (err) {
+    // Log any error that occurs and redirect to the home page
+    console.error(err);
+    res.redirect('/');
+  }
+});
 
+// Information page
+app.get('/information', (req, res) => {
+  res.render('information');
+});
 
 // My Account page
 app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
@@ -92,8 +119,6 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
       return;
     }
   
-    // Fetch all authors and publishers from the database
-    const player = await Player.find();
     const team = await Team.find();
   
     // Fetch the user's details and populate their deals
@@ -185,54 +210,6 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
   }
 });
 
-app.get('/', checkUser, async (req,res) => {
-  try {
-    // Fetch all authors, categories, and publishers from the database
-    const team = await Team.find();
-    const player = await Player.find();    
-  
-    // Fetch all books and populate their author, category, and publisher fields
-    let deal = await Player.find().populate('team');
-  
-    // Get the total count of books
-    // const count = await Book.countDocuments();
-  
-    // Get the current date in YYYY-MM-DD format
-    // const currentDate = new Date().toISOString().slice(0,10);
-  
-    // If there is no selected book or the selected date is not the current date
-    // if (!selectedBook || selectedDate !== currentDate) {
-    //   // Generate a random number within the range of the total book count
-    //   const random = Math.floor(Math.random() * count);
-  
-    //   // Select a random book and set it as the selected book
-    //   selectedBook = await Book.findOne().skip(random);
-  
-    //   // Set the selected date as the current date
-    //   selectedDate = currentDate;
-    // }
-  
-    // Fetch the latest 5 reviews
-    // const reviews = await Review.find().limit(5);
-  
-    // Map over the reviews to fetch the user who made each review
-    // const reviewsWithUser = await Promise.all(reviews.map(async (review) => {
-    //   const user = await User.findById(review.userId);
-    //   return {
-    //     ...review._doc,
-    //     reviewedUser: user
-    //   };
-    // }));
-  
-    // Render the index page with the fetched data
-    res.render('index', {player, team});
-  
-  } catch (err) {
-    // Log any error that occurs and redirect to the home page
-    console.error(err);
-    res.redirect('/');
-  }
-});
 
 app.get('/updateUser', requireAuth, (req, res) => {
   res.render('updateUser');
