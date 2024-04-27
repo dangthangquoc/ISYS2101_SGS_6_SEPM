@@ -16,8 +16,43 @@
 
 </head>
 <body>
-
-    
+    <!-- navbar -->
+    <nav>
+        <div class="container">
+            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
+            <div class="search-bar">
+                <span class="material-icons-sharp">search</span>
+                <input type="search" placeholder="Search">
+            </div>
+            <% if (user) { %>
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile-photo">
+                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                </div>
+                <div class="profileName">
+                    <h3> <%= user.fullName %> </h3>
+                </div>
+                <div class="profile">
+                    <span class="material-icons-sharp">expand_more</span>
+                </div>
+                
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+            </div>
+            <%} else { %>
+                <a href="/login" class="">
+                    <span class="material-symbols-outlined">
+                        login
+                    </span>
+                </a>
+            <%} %>
+        </div>
+    </nav>
 
     <!-- main -->
 
@@ -49,6 +84,10 @@
                     <span class="material-icons-sharp">settings</span>
                     <h4>Settings</h4>
                 </a>
+                <a href="#" onclick="openPopup()">
+                    <span class="material-icons-sharp">logout</span>
+                    <h4>Logout</h4>
+                </a>
             </div>
             <div class="updates">
                 <span class="material-icons-sharp">update</span>
@@ -56,6 +95,14 @@
                 <small>Security Updates</small>
                 <small>General Updates</small>
                 <a href="#">Update Now</a>
+            </div>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <h1>Are you sure you want to log out?</h1>
+                    <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
+                    <button class="no" onclick="closePopup()">No</button>
+                </div>
             </div>
         </aside>
 

@@ -148,6 +148,9 @@ nav .profile-area .profile{
     gap: 1rem;
     align-items: center;
 }
+nav .profile-photo .profileName{
+    font-size: large;
+}
 nav .profile-area .profile-photo{
     display: block;
     width: 3rem;
