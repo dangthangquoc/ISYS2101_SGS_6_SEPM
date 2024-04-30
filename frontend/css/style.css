@@ -131,16 +131,28 @@ aside .profile-area {
     border-bottom: 1px solid #ccc; /* Add a border at the bottom of the profile area */
     border-radius: 5%;
     margin: 15px 0;
+    display: flex;
 }
-aside .profile-photo .profileName{
+aside .profile-area .profileName{
     font-size: large;
+    margin-top: 10px;
 }
-aside .profile-area .profile-photo{
-    display: block;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
+aside .profile-photo {
+    width: 3.5rem; /* Set the width of the profile photo */
+    height: 3.5rem; /* Set the height of the profile photo */
+    border-radius: 50%; /* Make the profile photo round */
     overflow: hidden;
+    margin-right: 20px; /* Add space between the profile photo and profile name */
+}
+
+aside .profile-area a{
+    margin-left: auto;
+}
+aside .profile-area a span{
+    color: #000;
+}
+aside .profile-area a h4{
+    color: #000;
 }
 nav .profile-area span{
     cursor: pointer;
