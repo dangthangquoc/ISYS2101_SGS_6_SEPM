@@ -1,7 +1,7 @@
 // Import the necessary libraries
 const express = require('express');
-const { checkUser, isAdmin } = require('../middleware/authMiddleware');
-const bookController = require('../controllers/playerControllers');
+const isAdmin = require('../middleware/authMiddleware');
+const playerController = require('../controllers/playerControllers');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 // Define the storage location and naming convention for book images
-const bookImageStorage = multer.diskStorage({
+const playerImageStorage = multer.diskStorage({
   // Set the destination for storing book images
   destination: function(req, file, cb) {
     cb(null, 'frontend/images/');
@@ -41,8 +41,8 @@ router.get('/playerDetail/:id', checkUser, playerController.playerDetailGet);
 router.get('/searchResult', checkUser, playerController.searchGet);
 
 // Define the routes for adding books
-router.get('/addplayer', checkUser, playerController.addPlayerGet);
-router.post('/addplayer', checkUser, playerImageUpload.single('playerImage'), playerController.addPlayerPost);
+router.get('/addPlayer', checkUser, playerController.addPlayerGet);
+router.post('/addPlayer', checkUser, playerImageUpload.single('playerImage'), playerController.addPlayerPost);
 
 // Define the routes for updating books
 router.get('/updatePlayer/:id', checkUser, playerController.updateBookGet);

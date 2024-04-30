@@ -1,0 +1,88 @@
+<form method="post" id="detailUpdate" action="/updatePlayerDetail/<%= player._id %>">
+    <h3>update player detail</h3>
+    
+    <span>playerName</span>
+    <input type="text" name="playerName" class="box" value="<%= player.playerName %>" id="playerName" required>
+    <div class="playerName error"></div>
+    
+    <span>dob</span>
+    <input type="text" name="dob" class="box" value="<%= player.dob %>" id="dob" required>
+    <div class="dob error"></div>
+    
+    <span>details</span>
+    <div>
+        <select class="box" id="team" name="team">
+            <% team.forEach(team => { %>
+                <option value="<%= team._id %>" name="<%= team._id %>" <%= player.team && player.team._id.toString() === team._id.toString() ? 'selected' : '' %>><%= team.name %></option>
+            <% }); %>
+        </select>
+        <div class="team error"></div>
+    </div>
+    
+    <span>position</span>
+    <input type="position" name="position" class="box" value="<%= player.position %>" id="position" required>
+    <div class="position error"></div>
+  
+    <span>transferPrice</span>
+    <input type="transferPrice" name="transferPrice" class="box" value="<%= player.transferPrice %>" id="transferPrice" required>
+    <div class="transferPrice error"></div>
+  
+  </form>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const detailUpdate = document.querySelector('#detailUpdate');
+        const imageUpdate = document.querySelector('#imgUpdate');
+        // read the error
+        const playerNameError = document.querySelector('.playerName.error');
+        const positionError = document.querySelector('.position.error');
+        const dobError = document.querySelector('.dob.error');
+        const transferPriceError = document.querySelector('.transferPrice.error');
+        const teamError = document.querySelector('.team.error');
+        const playerImageError = document.querySelector('.playerImage.error');
+    
+        detailUpdate.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          // reset errors
+          playerNameError.textContent = '';
+          positionError.textContent = '';
+          dobError.textContent = '';
+          transferPriceError.textContent = '';
+          teamError.textContent = '';
+  
+          // Create a JSON object
+          const formData = {
+              'playerName': detailUpdate.playerName.value,
+              'position': detailUpdate.position.value,
+              'dob': detailUpdate.dob.value,
+              'team': detailUpdate.team.value,
+              'transferPrice': detailUpdate.transferPrice.value,
+          };
+          console.log(formData);
+  
+          try{
+              const id = '<%= player._id %>'
+              const res = await fetch(`/updatePlayerDetail/${id}`, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(formData), // Send the JSON data
+              });
+              const data = await res.json();
+              console.log(data);
+  
+              if (data.errors){
+                  ISBNError.textContent = ('This name is already registered');
+              }
+              else{
+                  descriptionError.textContent = ('Added successfully');
+              }
+          }
+          catch (err){
+              console.log(err);
+          }
+      });
+    });
+  </script>
+  <%- include('partials/footer'); -%>
