@@ -28,19 +28,6 @@
 
             <div class="icons">
                 <div id="search-btn" class="fas fa-search"></div>
-                <% if (user) { %>
-                    <% if (!user.isAdmin) { %>
-                        <a href="/wishlist" class="fas fa-heart"></a>
-                        <a href="/userReservations" class="fas fa-list"></a>
-                    <% } else { %>
-                        <a href="/dashboard" class="fas fa-tachometer-alt"></a>
-                    <% } %>
-                    <a href="/myAccount" class="fas fa-user"></a>
-                <%} else { %>
-                    <a href="/login" class="fas fa-heart"></a>
-                    <a href="/login" class="fas fa-list"></a>
-                    <a href="/login" class="fas fa-user"></a>
-                <%} %>
             </div>
 
 
@@ -69,10 +56,6 @@
         <label for="email">Email*</label>
         <input class="input-form" type="text" name="email" value="<%= user.email %>"/>
         <div class="email error"></div>
-
-        <label for="phone">Phone number*</label>
-        <input class="input-form" type="text" name="phone" value="<%= user.phone %>"/>
-        <div class="phone error"></div>
     
         <label for="password">Password*</label>
         <input class="input-form" type="password" name="password" required/>
@@ -133,7 +116,6 @@
     const userDetails = {
         fullName: detailsForm.fullName.value,
         email: detailsForm.email.value,
-        phone: detailsForm.phone.value,
         password: detailsForm.password.value
     };
 

@@ -262,7 +262,7 @@ app.post('/updateUserImage', requireAuth, checkUser, userImgUpload.single('profi
 // Route for updating the user's details
 app.post('/updateUserDetails', requireAuth, checkUser, async (req, res) => {
   // Extract the full name, email, phone and password from the request body
-  const { fullName, email, phone, password } = req.body;
+  const { fullName, email, password } = req.body;
   console.log(req.body);
 
   try {
@@ -276,7 +276,7 @@ app.post('/updateUserDetails', requireAuth, checkUser, async (req, res) => {
     // Update the user's details in the database
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId }, // find a user with the provided user ID
-      { fullName, email, phone, password: hashedPassword }, // update the user with the new details
+      { fullName, email, password: hashedPassword }, // update the user with the new details
       { new: true } // return the updated user
     );
 
