@@ -82,6 +82,7 @@ const userImgStorage = multer.diskStorage({
 
 const userImgUpload = multer({ storage: userImgStorage });
 
+
 // Route for all types of users
 app.get('/', checkUser, async (req,res) => {
   try {
@@ -120,7 +121,6 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
     }
   
     const team = await Team.find();
-  
     // Fetch the user's details and populate their deals
     const userDetails = await User.findById(user._id)
       .populate('deals')

@@ -1,6 +1,6 @@
 // Import the necessary libraries
 const express = require('express');
-const isAdmin = require('../middleware/authMiddleware');
+const { checkUser } = require('../middleware/authMiddleware');
 const playerController = require('../controllers/playerControllers');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
@@ -45,7 +45,7 @@ router.get('/addPlayer', checkUser, playerController.addPlayerGet);
 router.post('/addPlayer', checkUser, playerImageUpload.single('playerImage'), playerController.addPlayerPost);
 
 // Define the routes for updating books
-router.get('/updatePlayer/:id', checkUser, playerController.updateBookGet);
+router.get('/updatePlayer/:id', checkUser, playerController.updatePlayerGet);
 router.post('/updatePlayer/:id', checkUser, playerImageUpload.single('playerImage'), playerController.updatePlayerPost);
 router.post('/updatePlayerDetail/:id', checkUser, playerController.updatePlayerDetailPost);
 router.post('/updatePlayerImage/:id', checkUser, playerImageUpload.single('playerImage'), playerController.updatePlayerImagePost);

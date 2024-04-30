@@ -32,6 +32,11 @@ const handleErrorsforaddplayer = (err) => {
     console.log(err.message, err.code);
     let errors = { Name: '' };
 
+    if (err.code == 11000) {
+        errors.playerName = 'This player name has been registered';
+        return errors;
+    }
+
     // check for type of error
     if (err.message.includes('player validation failed')) {
         Object.values(err.errors).forEach(({ properties }) => {
