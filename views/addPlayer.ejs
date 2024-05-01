@@ -40,7 +40,6 @@
     const positionError = document.querySelector('.position.error');
     const dobError = document.querySelector('.dob.error');
     const transferPriceError = document.querySelector('.transferPrice.error');
-    const teamError = document.querySelector('.team.error');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -50,15 +49,14 @@
         positionError.textContent = '';
         dobError.textContent = '';
         transferPriceError.textContent = '';
-        teamError.textContent = '';
 
         // Create a FormData instance
         const formData = new FormData();
-        formData.append('playerName', form.title.value);
-        formData.append('position', form.numberOfPages.value);
-        formData.append('dob', form.author.value);
-        formData.append('transferPrice', form.category.value);
-        formData.append('team', form.publisher.value);
+        formData.append('playerName', form.playerName.value);
+        formData.append('position', form.position.value);
+        formData.append('dob', form.dob.value);
+        formData.append('transferPrice', form.transferPrice.value);
+        formData.append('team', form.team.value);
         if (form.playerImage.files.length > 0) {
           formData.append('playerImage', form.playerImage.files[0]);
         }
@@ -66,7 +64,7 @@
         console.log(formData);
         
         try{
-            const res = await fetch('/addPlayer', {
+            const res = await fetch('/addplayer', {
                 method: 'POST',
                 body: formData, // Send the form data
             });
@@ -79,7 +77,6 @@
                 positionError.textContent = data.errors.position;
                 dobError.textContent = data.errors.dob;
                 transferPriceError.textContent = data.errors.transferPrice;
-                teamError.textContent = data.errors.team;
             }
             else{
                 descriptionError.textContent = ('Added successfully');

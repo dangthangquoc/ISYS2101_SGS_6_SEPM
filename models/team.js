@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const teamSchema = new mongoose.Schema({
     teamName: {
         type: String,
-        require: [true, 'Please enter your full name']
+        require: [true, 'Please enter your team name']
     },
     teamImage: {
         type: String,
-        default: "frontend\images\profile-1.png",
+        // default: "frontend\images\profile-1.png",
         require: true
     },
     squadSize: {
@@ -39,7 +39,14 @@ const teamSchema = new mongoose.Schema({
         timestamps: true
 });
 
-
+teamSchema.post('save', function (doc, next) {
+    console.log('New team was created & saved', doc);
+    next();
+});
+// teamSchema.post('updateOne', async function (doc, next) {
+//     console.log('team has been updated', doc);
+//     next();
+// });
 
 // Define a model based on the schema
 const Team = mongoose.model('team', teamSchema);

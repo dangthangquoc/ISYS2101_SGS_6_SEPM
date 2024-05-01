@@ -23,7 +23,7 @@ const playerImageStorage = multer.diskStorage({
     const userId = decodedToken.id;
 
     // Construct the new filename using the formatted date and time, user ID, and original file name
-    const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+    const newFilename = `-${userId}-${file.originalname}`;
 
     // Set the new filename
     cb(null, newFilename);
