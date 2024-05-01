@@ -227,9 +227,10 @@ module.exports.deletePlayer = async (req, res) => {
 // Post for author, category, publisher
 
 module.exports.teamPost = async (req, res) => {
-    const { name } = req.body;
+    const { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player } = req.body;
+    let teamData = { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player };
     try {
-        const team = await Team.create({ name });
+        const team = await Team.create(teamData);
         res.status(200).json(team);
     }
     catch (err) {
