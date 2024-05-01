@@ -255,6 +255,30 @@ main aside .updates a:hover{
 
 
 /* <!-- section middle --> */
+.table__body .profile-area {
+    padding: 20px; /* Adjust as needed */
+    background-color: #080275; /* Background color for the profile area */
+    border-bottom: 1px solid #ccc; /* Add a border at the bottom of the profile area */
+    display: flex;
+}
+.table__body .profile-area .profileName{
+    font-size: large;
+    margin-top: 10px;
+}
+.table__body .profile-photo {
+    width: 5rem; /* Set the width of the profile photo */
+    height: 5rem; /* Set the height of the profile photo */
+    border-radius: 50%; /* Make the profile photo round */
+    overflow: hidden;
+    margin-right: 20px; /* Add space between the profile photo and profile name */
+}
+
+.table__body .profile-area {
+    margin-left: auto;
+}
+.table__body .profile-area h3{
+    color: white;
+}
 main section.middle .header{
     display: flex;
     align-items: center;
