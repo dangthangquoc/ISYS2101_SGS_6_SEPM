@@ -1,11 +1,19 @@
-<div class="popup-overlay">
-    <div class="popup-window">
-      <button class="close-btn">×</button>
-      <img class="player-image" src="<%= player.image %>" alt="<%= player.name %>">
-      <h2 class="player-name"><%= player.name %></h2>
-      <p class="player-dob"><%= player.dob %></p>
-      <p class="player-position"><%= player.position %></p>
-      <p class="player-transfer-price"><%= player.transferPrice %></p>
-      <p class="player-team"><%= player.team %></p>
+<div id="Players" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
-  </div>  
+
+  </div>
+</div>
