@@ -298,6 +298,16 @@ app.post('/updateUserDetails', requireAuth, checkUser, async (req, res) => {
   }
 });
 
+// Team table display function
+app.get('/', (req, res) => {
+  Team.find({}, function(err, team) {
+    res.render('index', {
+      teamTable: team
+    })
+  })
+})
+
+
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
