@@ -86,7 +86,7 @@ module.exports.addPlayerPost = async (req, res) => {
         let playerData = { playerName, position, dob, transferPrice, team };
 
         if (req.file) {
-            playerData.bookImage = "/images/" + req.file.filename;
+            playerData.playerImage = "/images/" + req.file.filename;
         }
 
         const player = await Player.create(playerData);
@@ -226,10 +226,24 @@ module.exports.deletePlayer = async (req, res) => {
 
 // Post for author, category, publisher
 
-module.exports.teamPost = async (req, res) => {
-    const { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player } = req.body;
-    let teamData = { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player };
+module.exports.teamGet = async (req, res) => {
     try {
+        res.render('team');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+module.exports.teamPost = async (req, res) => {
+    
+    try {
+        const { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player } = req.body;
+        let teamData = { teamName, squadSize, marketValue, transferRecord, avgPlayerValue, avgAge, player };
+        
+        if (req.file) {
+            teamData.teamImage = "/images/" + req.file.filename;
+        }
         const team = await Team.create(teamData);
         res.status(200).json(team);
     }
@@ -257,8 +271,4 @@ module.exports.deleteTeam = async (req, res) => {
         const errors = handleErrors(err);
         res.status(400).json({ errors });
     }
-}
-
-module.exports.teamGet = async (req, res) => {
-    res.render('team');
 }

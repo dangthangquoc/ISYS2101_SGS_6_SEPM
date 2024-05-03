@@ -54,7 +54,8 @@ router.post('/updatePlayerImage/:id', checkUser, playerImageUpload.single('playe
 router.post('/deletePlayer/:id', checkUser, playerController.deletePlayer);
 
 // Define the routes for managing authors, categories, and publishers
-router.post('/team', checkUser, playerController.teamPost);
+router.get('/team', checkUser, playerController.teamGet);
+router.post('/team', checkUser, playerImageUpload.single('teamImage'), playerController.teamPost);
 router.post('/deleteTeam/:id', checkUser, playerController.deleteTeam);
 
 // get for category
