@@ -90,8 +90,7 @@ module.exports.addPlayerPost = async (req, res) => {
         }
 
         const player = await Player.create(playerData);
-        const upda
-        tedTeam = await Team.findOneAndUpdate({ _id: team }, { $push: { player: player._id } }, { new: true });
+        const updatedTeam = await Team.findOneAndUpdate({ _id: team }, { $push: { player: player._id } }, { new: true });
         res.status(200).json({ player, updatedTeam});
     }
     catch (err) {
