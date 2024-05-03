@@ -1,9 +1,11 @@
+
 const mongoose = require('mongoose');
 
 const teamSchema = new mongoose.Schema({
     teamName: {
         type: String,
-        require: [true, 'Please enter your team name']
+        require: [true, 'Please enter your team name'],
+        unique: true
     },
     teamImage: {
         type: String,
@@ -30,10 +32,10 @@ const teamSchema = new mongoose.Schema({
         type: String,
         require: [true, 'Please enter team average'],
     },
-    player : {
+    player: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'player'
-    },
+    }],
 },
     {
         timestamps: true
