@@ -226,6 +226,15 @@ module.exports.deletePlayer = async (req, res) => {
 
 // Post for author, category, publisher
 
+module.exports.teamGet = async (req, res) => {
+    try {
+        res.render('team');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 module.exports.teamPost = async (req, res) => {
     
     try {
@@ -261,14 +270,5 @@ module.exports.deleteTeam = async (req, res) => {
     } catch (err) {
         const errors = handleErrors(err);
         res.status(400).json({ errors });
-    }
-}
-
-module.exports.teamGet = async (req, res) => {
-    try {
-        res.render('team');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
     }
 }
