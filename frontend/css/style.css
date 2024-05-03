@@ -390,6 +390,15 @@ tbody tr.hide td img {
     height: 0;
     transition: .2s ease-in-out .5s;
 }
+.container1 h1{
+    background-color: #659af5;
+}
+.container1{
+    background-color: #d1d5e1;
+}
+.container1 h1 h2 h3 h4{
+    font-weight: 200;
+}
 
 
 

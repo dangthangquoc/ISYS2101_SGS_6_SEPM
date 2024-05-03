@@ -30,6 +30,12 @@
                     <span class="material-icons-sharp">menu</span>
                 </button>
             </div>
+            <%} else { %>
+                <a href="/login" class="">
+                    <span class="material-symbols-outlined">
+                        login
+                    </span>
+                </a>
             <%} %>
         </div>
     </nav>
@@ -52,7 +58,7 @@
                         <div class="profileName">
                             <h3> <%= user.fullName %> </h3>
                         </div>
-                        <a href="myAccount.ejs">
+                        <a href="#">
                             <span class="material-icons-sharp">settings</span>
                             <h4>Edit</h4>
                         </a>
@@ -84,12 +90,18 @@
                     <span class="material-icons-sharp">settings</span>
                     <h4>Settings</h4>
                 </a>
-                <% if (user) { %>
-                <a href="/logout">
+                <a href="#" onclick="openPopup()">
                     <span class="material-icons-sharp">logout</span>
                     <h4>Logout</h4>
                 </a>
-                <%} %>
+            </div>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <h1>Are you sure you want to log out?</h1>
+                    <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
+                    <button class="no" onclick="closePopup()">No</button>
+                </div>
             </div>
         </aside>
 
@@ -111,15 +123,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= team.teamName %></td>
-                                <td><%= team.squadSize %></td>
-                                <td><%= team.marketValue %></td>
-                                <td><%= team.avgPlayerValue %></td>
-                                <td><%= team.avgAge %></td>
-                                <td><strong><%= team.transferRecord %></strong></td>
-                            </tr>
+                            <% team.forEach(team => { %>
+                                    <a href="/team/<%=team.id%>">
+                                        <div class="content">
+                                            <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %> Image"></a></td>
+                                            <td><%= team.teamName %></td>
+                                            <td><%= team.squadSize %></td>
+                                            <td><%= team.marketValue %></td>
+                                            <td><%= team.avgPlayerValue %></td>
+                                            <td><%= team.avgAge %></td>
+                                            <td><strong><%= team.transferRecord %></strong></td>
+                                            <!-- <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <% }) %> -->
                             <tr>
                                 <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %>"></td>
                                 <td><%= team.teamName %></td>

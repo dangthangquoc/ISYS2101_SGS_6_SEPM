@@ -107,6 +107,10 @@ app.get('/information', (req, res) => {
   res.render('information');
 });
 
+app.get('/playerDetail', (req, res) => {
+  res.render('playerDetail');
+});
+
 // My Account page
 app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
   try {
@@ -120,11 +124,11 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
       return;
     }
   
-    const team = await Team.find();
+    // const team = await Team.find();
     // Fetch the user's details and populate their deals
-    const userDetails = await User.findById(user._id)
-      .populate('deals')
-      .exec();
+    // const userDetails = await User.findById(user._id)
+    //   .populate('deals')
+    //   .exec();
   
     // If the user details are not found, return a 404 error
     if (!userDetails) {
