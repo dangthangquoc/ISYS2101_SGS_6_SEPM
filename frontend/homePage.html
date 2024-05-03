@@ -303,3 +303,27 @@
     <script src="simpleScript.js"></script>
 </body>
 </html>
+
+
+
+<% team.forEach(team => { %>
+    <div class="filterDiv <%= team.category.name %>">
+        <a href="/bookDetail/<%=book.id%>" class="swiper-slide box">
+            <div class="image">
+                <img src="<%= book.bookImage %>" alt="<%= book.title %> Image">
+            </div>
+            <div class="content">
+                <h1><%= book.title %></h1>
+                <h3><%= book.category.name %></h3>
+                <div class="author"><%= book.author.name %></div>
+                <!-- <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div> -->
+            </div>
+        </a>
+    </div>
+<% }) %>
