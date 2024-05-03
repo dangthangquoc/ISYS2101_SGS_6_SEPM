@@ -123,15 +123,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= team.teamName %></td>
-                                <td><%= team.squadSize %></td>
-                                <td><%= team.marketValue %></td>
-                                <td><%= team.avgPlayerValue %></td>
-                                <td><%= team.avgAge %></td>
-                                <td><strong><%= team.transferRecord %></strong></td>
-                            </tr>
+                            <% team.forEach(team => { %>
+                                    <a href="/team/<%=team.id%>">
+                                        <div class="content">
+                                            <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %> Image"></a></td>
+                                            <td><%= team.teamName %></td>
+                                            <td><%= team.squadSize %></td>
+                                            <td><%= team.marketValue %></td>
+                                            <td><%= team.avgPlayerValue %></td>
+                                            <td><%= team.avgAge %></td>
+                                            <td><strong><%= team.transferRecord %></strong></td>
+                                            <!-- <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <% }) %> -->
                             <tr>
                                 <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %>"></td>
                                 <td><%= team.teamName %></td>
