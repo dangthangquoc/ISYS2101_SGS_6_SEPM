@@ -129,7 +129,7 @@
                     <label for="team">Select an Team:</label>
                     <select id="team" name="team">
                       <% team.forEach(team => { %>
-                        <option value="<%= team._id %>" name="team"><%= team.name %></option>
+                        <option value="<%= team._id %>" name="team"><%= team.teamName %></option>
                       <% }); %>
                     </select>
                     <div class="team error"></div>
