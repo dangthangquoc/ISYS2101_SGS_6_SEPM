@@ -222,38 +222,6 @@ main aside .sidebar h4{
     font-weight: 500;
 }
 
-main aside .updates{
-    background: white;
-    border-radius: 1rem;
-    text-align: center;
-    padding: 1.6rem;
-}
-main aside .updates span{
-    font-style: 2.8rem;
-}
-main aside .updates h4{
-    margin: 1rem 0;
-    color: #27282f;
-}
-main aside .updates small{
-    color: #27282f;
-}
-main aside .updates a{
-    display: block;
-    width: 100%;
-    background: rgb(28, 28, 231);
-    color: white;
-    border-radius: 1rem;
-    padding: 0.8rem 0;
-    margin-top: 2rem;
-    transition: all 0.3s ease;
-
-}
-main aside .updates a:hover{
-    box-shadow: 0 1rem 2rem rgb(90, 16, 236);
-}
-
-
 /* <!-- section middle --> */
 .table__body .profile-area {
     padding: 20px; /* Adjust as needed */
