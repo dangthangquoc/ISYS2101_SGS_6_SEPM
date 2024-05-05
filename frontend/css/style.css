@@ -223,6 +223,11 @@ main aside .sidebar h4{
 }
 
 /* <!-- section middle --> */
+
+.middle{
+    display: grid;
+}
+
 .table__body .profile-area {
     padding: 20px; /* Adjust as needed */
     background-color: #080275; /* Background color for the profile area */
@@ -371,6 +376,63 @@ tbody tr.hide td img {
     background-color: #659af5;
 }
 
+.footer{
+    bottom: 0;
+    width: 100%;
+    color: rgb(9, 3, 3);
+    text-align: center;
+}
+.footer .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1.5rem;
+}
+
+.footer .box-container .box h3{
+    font-size: 2.2rem;
+    color:var(--black);
+    padding:1rem 0;
+}
+
+.footer .box-container .box a{
+    display: block;
+    font-size: 1.4rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.footer .box-container .box a i{
+    color:var(--green);
+    padding-right: .5rem;
+}
+
+.footer .box-container .box a:hover i{
+    padding-right: 2rem;
+}
+
+.footer .box-container .box .map{
+    width:100%;
+}
+
+.footer .share{
+    padding:1rem 0;
+    text-align: center;
+}
+
+.footer .credit{
+    border-top: var(--border);
+    margin-top: 2rem;
+    padding:1rem;
+    padding-top: 2.5rem;
+    font-size: 2rem;
+    color:var(--light-color);
+    text-align: center;
+    /* padding-bottom: 10rem; */
+}
+
+.footer .credit span{
+    color:var(--green);
+}
 
 
 @media (max-width: 1000px) {
