@@ -126,8 +126,10 @@
                         <tbody>
                             <% team.forEach(team => { %>
                                     <tr>
-                                          
-                                        <td><img src="<%= team.teamImage %>" alt="<%= team.teamName %> Image"></a></td>
+                                        <td>
+                                            <img src="<%= team.teamImage %>" alt="<%= team.teamName %> Image">
+                                            
+                                        </td>
                                         <td><a href="/team/<%=team.id%>"><%= team.teamName %></a></td>
                                         <td><%= team.squadSize %></td>
                                         <td><%= team.marketValue %></td>

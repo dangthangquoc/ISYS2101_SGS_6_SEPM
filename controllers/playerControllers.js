@@ -119,7 +119,7 @@ module.exports.updatePlayerPost = async (req, res) => {
                 if (err) console.error(err);
             });
         }
-        const bookImage = "/images/" + (req.file ? req.file.filename : '');
+        const playerImage = "/images/" + (req.file ? req.file.filename : '');
 
         const updatedPlayer = await Player.findByIdAndUpdate(req.params.id, { playerName, position, dob, transferPrice, team }, { new: true });
         // Update the author, category, and publisher if provided
@@ -168,7 +168,7 @@ module.exports.updatePlayerImagePost = async (req, res) => {
             if (err) console.error(err);
         });
         }
-        const plaerImage = "/images/" + (req.file ? req.file.filename : '');
+        const playerImage = "/images/" + (req.file ? req.file.filename : '');
         const updatedPlayer = await Player.findByIdAndUpdate(req.params.id, { playerImage }, { new: true });
 
         if (!updatedPlayer) {
@@ -208,7 +208,7 @@ module.exports.deletePlayer = async (req, res) => {
         await Team.updateOne({ player: { $in: [req.params.id] } }, { $pull: { player: req.params.id } });
 
         // Remove Image
-        if (player.playerImage && player.playerImage !== 'https://i.ibb.co/K05xQk1/book7.png') {
+        if (player.playerImage && player.playerImage !== '/images/User-Profile-PNG-Free-Download.png') {
             fs.unlink(path.join(__dirname, 'frontend', book.bookImage), err => {
                 if (err) console.error(err);
             });
