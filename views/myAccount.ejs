@@ -13,6 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="../frontend/css/myAccount.css">
+    <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
 
 </head>
 <body>
@@ -20,23 +21,12 @@
     <!-- navbar -->
     <nav>
         <div class="container">
-            <img src="../frontend/images/fsrs.png" class="logo" alt="logo">
+            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
             <div class="search-bar">
                 <span class="material-icons-sharp">search</span>
                 <input type="search" placeholder="Search">
             </div>
             <div class="profile-area">
-                <div class="theme-btn">
-                    <span class="material-icons-sharp active">light_mode</span>
-                    <span class="material-icons-sharp">dark_mode</span>
-                </div>
-                <div class="profile-photo">
-                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %>'s Profile Picture">
-                </div>
-                <div class="profile">
-                    <h5><%= fullName %></h5>
-                    <span class="material-icons-sharp">expand_more</span>
-                </div>
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
@@ -54,7 +44,26 @@
                 <span class="material-icons-sharp">close</span>
             </button>
             <div class="sidebar">
-                <a href="#" class="active">
+                <% if (user) { %>
+                    <div class="profile-area">
+                        <div class="profile-photo">
+                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                        </div>
+                        <div class="profileName">
+                            <h3> <%= user.fullName %> </h3>
+                        </div>
+                        <a href="#">
+                            <span class="material-icons-sharp">settings</span>
+                            <h4>Edit</h4>
+                        </a>
+                    </div>
+                    <%} else { %>
+                        <a href="/login" class="">
+                            <span class="material-icons-sharp">login</span>
+                            <h4>Login/Sign Up</h4>
+                        </a>
+                    <%} %>
+                <a href="#" class="active"> 
                     <span class="material-icons-sharp">dashboard</span>
                     <h4>Dashboard</h4>
                 </a>
@@ -74,13 +83,12 @@
                     <span class="material-icons-sharp">settings</span>
                     <h4>Settings</h4>
                 </a>
-            </div>
-            <div class="updates">
-                <span class="material-icons-sharp">update</span>
-                <h4>Updates Available</h4>
-                <small>Security Updates</small>
-                <small>General Updates</small>
-                <a href="#">Update Now</a>
+                <% if (user) {%>
+                <a href="/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h4>Logout</h4>
+                </a>
+                <%} %>
             </div>
         </aside>
 

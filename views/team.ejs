@@ -13,6 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
 
 </head>
 <body>
@@ -24,19 +25,11 @@
                 <span class="material-icons-sharp">search</span>
                 <input type="search" placeholder="Search">
             </div>
-            <% if (user) { %>
             <div class="profile-area">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
                 </button>
             </div>
-            <%} else { %>
-                <a href="/login" class="">
-                    <span class="material-symbols-outlined">
-                        login
-                    </span>
-                </a>
-            <%} %>
         </div>
     </nav>
 
@@ -65,12 +58,11 @@
                     </div>
                     <%} else { %>
                         <a href="/login" class="">
-                            <span class="material-symbols-outlined">
-                                login
-                            </span>
+                            <span class="material-icons-sharp">login</span>
+                            <h4>Login/Sign Up</h4>
                         </a>
                     <%} %>
-                <a href="#" class="active">
+                <a href="#" class="active"> 
                     <span class="material-icons-sharp">dashboard</span>
                     <h4>Dashboard</h4>
                 </a>
@@ -90,18 +82,12 @@
                     <span class="material-icons-sharp">settings</span>
                     <h4>Settings</h4>
                 </a>
-                <a href="#" onclick="openPopup()">
+                <% if (user) {%>
+                <a href="/logout">
                     <span class="material-icons-sharp">logout</span>
                     <h4>Logout</h4>
                 </a>
-            </div>
-            <div id="popup" class="popup">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup()">&times;</span>
-                    <h1>Are you sure you want to log out?</h1>
-                    <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
-                    <button class="no" onclick="closePopup()">No</button>
-                </div>
+                <%} %>
             </div>
         </aside>
 
@@ -110,102 +96,112 @@
             <main class="table" id="customers_table">
             
                 <section class="table__body">
-                    <form enctype="multipart/form-data" action="/team">
-                        <h2>Add Team</h2>
-                    
-                        <lable for="teamName">teamName</lable>
-                        <input type="text" name="teamName"/>
-                        <div class="teamName error"></div>
-                    
-                        <label for="teamImage">Team Image</label>
-                        <input type="file" name="teamImage" />
-                        <div class="teamImage error"></div>
+                    <div class="addForm">
+                        <form enctype="multipart/form-data" action="/team">
+                            <h1>Add Team</h1>
+                            <br>
                         
-                        <lable for="squadSize">squadSize</lable>
-                        <input type="text" name="squadSize"/>
-                        <div class="squadSize error"></div>
-                    
-                        <lable for="marketValue">marketValue</lable>
-                        <input type="text" name="marketValue"/>
-                        <div class="marketValue error"></div>
-                    
-                        <lable for="transferRecord">transferRecord</lable>
-                        <input type="text" name="transferRecord"/>
-                        <div class="transferRecord error"></div>
-                    
-                        <lable for="avgPlayerValue">avgPlayerValue</lable>
-                        <input type="text" name="avgPlayerValue"/>
-                        <div class="avgPlayerValue error"></div>
-                    
-                        <lable for="avgAge">avgAge</lable>
-                        <input type="text" name="avgAge"/>
-                        <div class="avgAge error"></div>
-                    
-                        <button type="submit">Add team</button>
+                            <lable for="teamName">teamName</lable>
+                            <input type="text" name="teamName"/>
+                            <div class="teamName error"></div>
+                            <br>
                         
-                        
-                    </form>
-                    
-                    <script>
-                        const form = document.querySelector('form');
-                        // read the error
-                        const teamImageError = document.querySelector('.teamImage.error');
-                        const teamNameError = document.querySelector('.teamName.error');
-                        const squadSizeError = document.querySelector('.squadSize.error');
-                        const marketValueError = document.querySelector('.marketValue.error');
-                        const transferRecordError = document.querySelector('.transferRecord.error');
-                        const avgPlayerValueError = document.querySelector('.avgPlayerValue.error');
-                        const avgAgeError = document.querySelector('.avgAge.error');
-                    
-                        form.addEventListener('submit', async (e) => {
-                            e.preventDefault();
-                            //reset errors
-                            teamImageError.textContent = '';
-                            teamNameError.textContent = '';
-                            squadSizeError.textContent = '';
-                            marketValueError.textContent = '';
-                            transferRecordError.textContent = '';
-                            avgPlayerValueError.textContent = '';
-                            avgAgeError.textContent = '';
-                    
-                            // Create a FormData instance
-                            const formData = new FormData();
-                            formData.append('avgAge', form.avgAge.value);
-                            formData.append('teamName', form.teamName.value);
-                            formData.append('squadSize', form.squadSize.value);
-                            formData.append('marketValue', form.marketValue.value);
-                            formData.append('transferRecord', form.transferRecord.value);
-                            formData.append('avgPlayerValue', form.avgPlayerValue.value);
-                            if (form.teamImage.files.length > 0) {
-                              formData.append('teamImage', form.teamImage.files[0]);
-                            }
-                    
-                            console.log(formData);
+                            <label for="teamImage">Team Image</label>
+                            <input type="file" name="teamImage" />
+                            <div class="teamImage error"></div>
+                            <br>
                             
-                            try{
-                                const res = await fetch('/team', {
-                                    method: 'POST',
-                                    body: formData, // Send the form data
-                                });
-                                const data = await res.json();
-                                console.log(data);
+                            <lable for="squadSize">squadSize</lable>
+                            <input type="text" name="squadSize"/>
+                            <div class="squadSize error"></div>
+                            <br>
+                        
+                            <lable for="marketValue">marketValue</lable>
+                            <input type="text" name="marketValue"/>
+                            <div class="marketValue error"></div>
+                            <br>
+                        
+                            <lable for="transferRecord">transferRecord</lable>
+                            <input type="text" name="transferRecord"/>
+                            <div class="transferRecord error"></div>
+                            <br>
+                        
+                            <lable for="avgPlayerValue">avgPlayerValue</lable>
+                            <input type="text" name="avgPlayerValue"/>
+                            <div class="avgPlayerValue error"></div>
+                            <br>
+                        
+                            <lable for="avgAge">avgAge</lable>
+                            <input type="text" name="avgAge"/>
+                            <div class="avgAge error"></div>
+                            <br>
+                        
+                            <button type="submit">Add team</button>
+                            
+                            
+                        </form>
+                        
+                        <script>
+                            const form = document.querySelector('form');
+                            // read the error
+                            const teamImageError = document.querySelector('.teamImage.error');
+                            const teamNameError = document.querySelector('.teamName.error');
+                            const squadSizeError = document.querySelector('.squadSize.error');
+                            const marketValueError = document.querySelector('.marketValue.error');
+                            const transferRecordError = document.querySelector('.transferRecord.error');
+                            const avgPlayerValueError = document.querySelector('.avgPlayerValue.error');
+                            const avgAgeError = document.querySelector('.avgAge.error');
+                        
+                            form.addEventListener('submit', async (e) => {
+                                e.preventDefault();
+                                //reset errors
+                                teamImageError.textContent = '';
+                                teamNameError.textContent = '';
+                                squadSizeError.textContent = '';
+                                marketValueError.textContent = '';
+                                transferRecordError.textContent = '';
+                                avgPlayerValueError.textContent = '';
+                                avgAgeError.textContent = '';
+                        
+                                // Create a FormData instance
+                                const formData = new FormData();
+                                formData.append('avgAge', form.avgAge.value);
+                                formData.append('teamName', form.teamName.value);
+                                formData.append('squadSize', form.squadSize.value);
+                                formData.append('marketValue', form.marketValue.value);
+                                formData.append('transferRecord', form.transferRecord.value);
+                                formData.append('avgPlayerValue', form.avgPlayerValue.value);
+                                if (form.teamImage.files.length > 0) {
+                                  formData.append('teamImage', form.teamImage.files[0]);
+                                }
+                        
+                                console.log(formData);
+                                
+                                try{
+                                    const res = await fetch('/team', {
+                                        method: 'POST',
+                                        body: formData, // Send the form data
+                                    });
+                                    const data = await res.json();
+                                    console.log(data);
+                        
+                                    if (data.errors){
+                                        teamImageError.textContent = data.errors.teamImage
+                                        teamNameError.textContent = data.errors.teamName
+                                        squadSizeError.textContent = data.errors.squadSize
+                                        marketValueError.textContent = data.errors.marketValue
+                                        transferRecordError.textContent = data.errors.transferRecord
+                                        avgPlayerValueError.textContent = data.errors.avgPlayerValue
+                                        avgAgeError.textContent = data.errors.avgAge
+                                    }
+                                    else{
+                                        descriptionError.textContent = ('Added successfully');
+                                    }
+                                }
+                                catch (err){
+                                    console.log(err);
+                                }
+                            });
+                        </script>
                     
-                                if (data.errors){
-                                    teamImageError.textContent = data.errors.teamImage
-                                    teamNameError.textContent = data.errors.teamName
-                                    squadSizeError.textContent = data.errors.squadSize
-                                    marketValueError.textContent = data.errors.marketValue
-                                    transferRecordError.textContent = data.errors.transferRecord
-                                    avgPlayerValueError.textContent = data.errors.avgPlayerValue
-                                    avgAgeError.textContent = data.errors.avgAge
-                                }
-                                else{
-                                    descriptionError.textContent = ('Added successfully');
-                                }
-                            }
-                            catch (err){
-                                console.log(err);
-                            }
-                        });
-                    </script>
 

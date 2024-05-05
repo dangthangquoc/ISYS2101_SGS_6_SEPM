@@ -300,7 +300,7 @@ main.table {
 
 
 .table__body {
-    width: 1345px;
+    width: 1300px;
     background-color: #fffb;
 
 
@@ -333,9 +333,8 @@ table {
 td img {
     width: 36px;
     height: 36px;
-    overflow: hidden;
     margin-right: .5rem;
-
+    border-radius: 50%;
 
     vertical-align: middle;
 }
@@ -400,7 +399,9 @@ tbody tr.hide td img {
 .container1 h1 h2 h3 h4{
     font-weight: 200;
 }
-
+.addForm h1{
+    background-color: #659af5;
+}
 
 
 

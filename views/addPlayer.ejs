@@ -19,119 +19,111 @@
 <body>
     <!-- navbar -->
     <nav>
-        <div class="container">
-            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-            <div class="search-bar">
-                <span class="material-icons-sharp">search</span>
-                <input type="search" placeholder="Search">
-            </div>
-            <% if (user) { %>
-            <div class="profile-area">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">menu</span>
-                </button>
-            </div>
-            <%} else { %>
-                <a href="/login" class="">
-                    <span class="material-symbols-outlined">
-                        login
-                    </span>
-                </a>
-            <%} %>
-        </div>
-    </nav>
+      <div class="container">
+          <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
+          <div class="search-bar">
+              <span class="material-icons-sharp">search</span>
+              <input type="search" placeholder="Search">
+          </div>
+          <div class="profile-area">
+              <button id="menu-btn">
+                  <span class="material-icons-sharp">menu</span>
+              </button>
+          </div>
+      </div>
+  </nav>
 
-    <!-- main -->
+  <!-- main -->
 
-    <main>
+  <main>
 
-        <!-- aside -->
-        <aside>
-            <button id="close-btn">
-                <span class="material-icons-sharp">close</span>
-            </button>
-            <div class="sidebar">
-                <% if (user) { %>
-                    <div class="profile-area">
-                        <div class="profile-photo">
-                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
-                        </div>
-                        <div class="profileName">
-                            <h3> <%= user.fullName %> </h3>
-                        </div>
-                        <a href="#">
-                            <span class="material-icons-sharp">settings</span>
-                            <h4>Edit</h4>
-                        </a>
-                    </div>
-                    <%} else { %>
-                        <a href="/login" class="">
-                            <span class="material-symbols-outlined">
-                                login
-                            </span>
-                        </a>
-                    <%} %>
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">dashboard</span>
-                    <h4>Dashboard</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">currency_exchange</span>
-                    <h4>Market</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">pie_chart</span>
-                    <h4>Analytics</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">help_center</span>
-                    <h4>Help Center</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h4>Settings</h4>
-                </a>
-                <a href="#" onclick="openPopup()">
-                    <span class="material-icons-sharp">logout</span>
-                    <h4>Logout</h4>
-                </a>
-            </div>
-            <div id="popup" class="popup">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup()">&times;</span>
-                    <h1>Are you sure you want to log out?</h1>
-                    <a href="/logout"><button class="yes" onclick="logout()">Yes</button></a>
-                    <button class="no" onclick="closePopup()">No</button>
-                </div>
-            </div>
-        </aside>
+      <!-- aside -->
+      <aside>
+          <button id="close-btn">
+              <span class="material-icons-sharp">close</span>
+          </button>
+          <div class="sidebar">
+              <% if (user) { %>
+                  <div class="profile-area">
+                      <div class="profile-photo">
+                          <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                      </div>
+                      <div class="profileName">
+                          <h3> <%= user.fullName %> </h3>
+                      </div>
+                      <a href="#">
+                          <span class="material-icons-sharp">settings</span>
+                          <h4>Edit</h4>
+                      </a>
+                  </div>
+                  <%} else { %>
+                      <a href="/login" class="">
+                          <span class="material-icons-sharp">login</span>
+                          <h4>Login/Sign Up</h4>
+                      </a>
+                  <%} %>
+              <a href="#" class="active"> 
+                  <span class="material-icons-sharp">dashboard</span>
+                  <h4>Dashboard</h4>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">currency_exchange</span>
+                  <h4>Market</h4>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">pie_chart</span>
+                  <h4>Analytics</h4>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">help_center</span>
+                  <h4>Help Center</h4>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">settings</span>
+                  <h4>Settings</h4>
+              </a>
+              <% if (user) {%>
+              <a href="/logout">
+                  <span class="material-icons-sharp">logout</span>
+                  <h4>Logout</h4>
+              </a>
+              <%} %>
+          </div>
+      </aside>
 
         <!--Middle Section-->
         <section class="middle">
             <main class="table" id="customers_table">
             
-                <section class="table__body">
+              <section class="table__body">
+                <div class="addForm">
                   <form enctype="multipart/form-data" action="/addplayer">
-                    <h2>Add Player</h2>
+                    <h1>Add Player</h1>
+                    <br>
                     <label for="playerImage">Player Image</label>
                     <input type="file" name="playerImage" />
                     <div class="playerImage error"></div>
+                    <br>
                 
                     <lable for="playerName">playerName</lable>
                     <input type="text" name="playerName"/>
                     <div class="playerName error"></div>
+                    <br>
                 
                     <lable for="position">position</lable>
                     <input type="text" name="position"/>
                     <div class="position error"></div>
+                    <br>
                 
                     <lable for="dob">dob</lable>
                     <input type="date" name="dob"/>
                     <div class="dob error"></div>
+                    <br>
                 
                     <lable for="transferPrice">transferPrice</lable>
                     <input type="text" name="transferPrice"/>
                     <div class="transferPrice error"></div>
+                    <br>
                 
                 
                     <label for="team">Select an Team:</label>
@@ -141,7 +133,7 @@
                       <% }); %>
                     </select>
                     <div class="team error"></div>
-                    
+                    <br>
                     <button type="submit">Add</button>
                 </form>
                 
@@ -200,6 +192,7 @@
                         }
                     });
                 </script>
+              </div>
                 
                   
 
