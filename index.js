@@ -307,23 +307,6 @@ app.get('/', (req, res) => {
   })
 })
 
-// Route to display the individual team page
-app.get('/team/:_id', checkUser, async (req, res) => {
-  try {
-    const teamId = req.params.id;
-    const team = await Team.findById(teamId);
-    const players = await Player.find({ team: teamId });
-
-    if (team) {
-      res.render('allPlayer', { team, players });
-    } else {
-      res.status(404).send('Team not found');
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error retrieving team information');
-  }
-});
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
