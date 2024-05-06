@@ -99,139 +99,29 @@
                     <table>
                         <div class="profile-area">
                             <div class="profile-photo">
-                                <img src="<%= team.teamImage %>" alt="<%= user.fullName %> Profile Picture">
+                                <img src="<%= team.teamImage %>">
                             </div>
                             <div class="profileName">
                                 <h3> <%= team.teamName %> </h3>
                             </div>
                         </div>
-                        <thead>
-                            <tr>
-                                <th> Picture </th>
-                                <th> Name </th>
-                                <th> Position </th>
-                                <th> Date of Birth </th>
-                                <th> Transfer Price </th>
-                            </tr>
-                        </thead>
                         <tbody>
+                            <% player.forEach(player => { %>
                             <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
+                            <td><img src="<%= player.playerImage %>" alt="<%= player.playerName %>"></td>
+                              <td><a href="/player/<%=player.id%>"><%= player.playerName %></a></td>
+                              <td><%= player.Squad %></a></td>
+                              <td><%= player.position %></td>
+                              <td><%= player.Age %></td>
+                              <td><strong><%= player.transferPrice %></strong></td>
                             </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<%= player.playerImage %>" alt="<%= team.teamName %>"></td>
-                                <td><%= player.playerName %></td>
-                                <td><%= player.position %></td>
-                                <td><%= player.dob %></td>
-                                <td><strong><%= player.transferPrice %></strong></td>
-                            </tr>
-                        </tbody>
+                            <% }) %>
+                          </tbody>
                     </table>
                 </section>
             </main>
-            <section class="footer">
-
-                <div class="box-container">
+        </section>
+    </main>
+</body>
+</html>
         
-                    <div class="box">
-                        <h3>extra links</h3>
-                        <a href="/information#aboutUs"> <i class="fas fa-arrow-right"></i> about us </a>
-                        <a href="/information#copyRight"> <i class="fas fa-arrow-right"></i> copyright </a>
-                        <a href="/information#privatePolicy"> <i class="fas fa-arrow-right"></i> privacy policy </a>
-                        <a href="/information#paymentMethod"> <i class="fas fa-arrow-right"></i> payment method </a>
-                    </div>
-        
-                    <div class="box">
-                        <h3>contact info</h3>
-                        <a href="https://www.facebook.com/sonnnayyyf" target="_blank"> <i class='far fa-id-badge'></i> Dang Trung Hieu - s3911594 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100011122297129" target="_blank"> <i class='far fa-id-badge'></i> Le Trung Hieu - s3818683 </a>
-                        <a href="https://www.facebook.com/tuankiet.luong.218" target="_blank"> <i class='far fa-id-badge'></i> Luu Van Thien Toan - s3979512 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100014016729432" target="_blank"> <i class='far fa-id-badge'></i> Dang Quoc Thang - s3977877 </a>
-                    </div>
-        
-                </div>
-        
-                <div class="credit"> created by <span>Group 6</span> | all rights reserved! </div>
-        
-            </section>
