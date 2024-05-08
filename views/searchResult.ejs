@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
+
+</head>
+<body>
+    <!-- navbar -->
+    <nav>
+        <div class="container">
+            <a href="/"><img src="/images/fsrs.png" class="logo" alt="logo"></a>
+            <div class="search-bar">
+                <span class="material-icons-sharp">search</span>
+                <input type="search" placeholder="Search">
+            </div>
+            <div class="profile-area">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+
+    <main>
+
+        <!-- aside -->
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons-sharp">close</span>
+            </button>
+            <div class="sidebar">
+                <% if (user) { %>
+                    <div class="profile-area">
+                        <div class="profile-photo">
+                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                        </div>
+                        <div class="profileName">
+                            <h3> <%= user.fullName %> </h3>
+                        </div>
+                        <a href="#">
+                            <span class="material-icons-sharp">settings</span>
+                            <h4>Edit</h4>
+                        </a>
+                    </div>
+                    <%} else { %>
+                        <a href="/login" class="">
+                            <span class="material-icons-sharp">login</span>
+                            <h4>Login/Sign Up</h4>
+                        </a>
+                    <%} %>
+                <a href="/" class="active"> 
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="/deal">
+                    <span class="material-icons-sharp">currency_exchange</span>
+                    <h4>Deals</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">pie_chart</span>
+                    <h4>Analytics</h4>
+                </a>
+                <a href="/information">
+                    <span class="material-icons-sharp">help_center</span>
+                    <h4>Information</h4>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h4>Settings</h4>
+                </a>
+                <% if (user) {%>
+                <a href="/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h4>Logout</h4>
+                </a>
+                <%} %>
+            </div>
+        </aside>
+
+        <!--Middle Section-->
+        <section class="middle">
+            <main class="table" id="customers_table">
+            
+                <section class="table__body">
+                    <h1 class="heading"> <span>Search result for "<%= searchQuery %>"</span> </h1>
+
+                    <div class="allbook">
+                        <% player.forEach((player) => { %>
+                            <a href="/playerDetail/<%=player.id%>" class="swiper-slide box">
+                                <div class="image">
+                                    <img src="<%=player.playerImage%>" alt="">
+                                </div>
+                                <div class="content">
+                                    <h3><%=player.playerName%></h3>
+                                    <div class="author"><%=team.teamName%></div>
+                                </div>
+                            </a>
+                        <% }) %>
+                    </div>
+                </section>

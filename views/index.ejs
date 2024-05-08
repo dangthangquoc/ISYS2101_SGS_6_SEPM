@@ -20,7 +20,7 @@
     <!-- navbar -->
     <nav>
         <div class="container">
-            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
+            <a href="/"><img src="/images/fsrs.png" class="logo" alt="logo"></a>
             <div class="search-bar">
                 <span class="material-icons-sharp">search</span>
                 <input type="search" placeholder="Search">
@@ -62,23 +62,23 @@
                             <h4>Login/Sign Up</h4>
                         </a>
                     <%} %>
-                <a href="/" class="active"> 
+                <a href="/" class="sidebar-link active"> 
                     <span class="material-icons-sharp">dashboard</span>
                     <h4>Dashboard</h4>
                 </a>
-                <a href="/deal">
+                <a href="/deal" class="sidebar-link">
                     <span class="material-icons-sharp">currency_exchange</span>
                     <h4>Deals</h4>
                 </a>
-                <a href="#">
+                <a href="#" class="sidebar-link">
                     <span class="material-icons-sharp">pie_chart</span>
                     <h4>Analytics</h4>
                 </a>
-                <a href="/information">
+                <a href="/information" class="sidebar-link">
                     <span class="material-icons-sharp">help_center</span>
                     <h4>Information</h4>
                 </a>
-                <a href="#">
+                <a href="#" class="sidebar-link">
                     <span class="material-icons-sharp">settings</span>
                     <h4>Settings</h4>
                 </a>
@@ -166,3 +166,33 @@
     
 </body>
 </html>
+<script>
+    document.getElementById('searchInputteam').addEventListener('keyup', function() {
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('.styled-table tbody tr');
+
+        rows.forEach(row => {
+            const cells = Array.from(row.getElementsByClassName('searchableteam'));
+            const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
+
+            if (cellText.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all links
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            // Add active class to the clicked link
+            this.classList.add('active');
+        });
+    });
+});
+</script>

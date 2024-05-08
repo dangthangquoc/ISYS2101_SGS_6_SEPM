@@ -62,26 +62,26 @@
                             <h4>Login/Sign Up</h4>
                         </a>
                     <%} %>
-                <a href="/" class="active"> 
-                    <span class="material-icons-sharp">dashboard</span>
-                    <h4>Dashboard</h4>
-                </a>
-                <a href="/deal">
-                    <span class="material-icons-sharp">currency_exchange</span>
-                    <h4>Deals</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">pie_chart</span>
-                    <h4>Analytics</h4>
-                </a>
-                <a href="/information">
-                    <span class="material-icons-sharp">help_center</span>
-                    <h4>Information</h4>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">settings</span>
-                    <h4>Settings</h4>
-                </a>
+                    <a href="/" class="sidebar-link active"> 
+                        <span class="material-icons-sharp">dashboard</span>
+                        <h4>Dashboard</h4>
+                    </a>
+                    <a href="/deal" class="sidebar-link">
+                        <span class="material-icons-sharp">currency_exchange</span>
+                        <h4>Deals</h4>
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons-sharp">pie_chart</span>
+                        <h4>Analytics</h4>
+                    </a>
+                    <a href="/information" class="sidebar-link">
+                        <span class="material-icons-sharp">help_center</span>
+                        <h4>Information</h4>
+                    </a>
+                    <a href="#" class="sidebar-link">
+                        <span class="material-icons-sharp">settings</span>
+                        <h4>Settings</h4>
+                    </a>
                 <% if (user) {%>
                 <a href="/logout">
                     <span class="material-icons-sharp">logout</span>
@@ -604,3 +604,16 @@
 
 
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all links
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            // Add active class to the clicked link
+            this.classList.add('active');
+        });
+    });
+});
+</script>
