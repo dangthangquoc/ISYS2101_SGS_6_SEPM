@@ -47,7 +47,8 @@
                 <% if (user) { %>
                     <div class="profile-area">
                         <div class="profile-photo">
-                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                            <img src="<%= user.profileImage %>" alt="Profile Picture">
+                            <a href="/updateUser"><button id="editBtn">Edit Profile</button></a>
                         </div>
                         <div class="profileName">
                             <h3> <%= user.fullName %> </h3>

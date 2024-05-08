@@ -163,7 +163,7 @@ app.post('/updateUserImage', requireAuth, checkUser, userImgUpload.single('profi
     }
 
     // Extract the filename from the uploaded file
-    let profileImage = "/images" + (req.file ? req.file.filename : '');
+    let profileImage = "/images/" + (req.file ? req.file.filename : '');
 
     // If the user has sent '/images/userImage/', replace it with the default image URL
     if (profileImage === '/images') {

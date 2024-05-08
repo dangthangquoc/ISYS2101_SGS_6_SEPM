@@ -38,10 +38,9 @@ const playerImageUpload = multer({ storage: playerImageStorage });
 // Define the routes for book details
 router.get('/allPlayer', checkUser, playerController.allPlayerGet);
 // playerRoutes.js
-router.get('/team/:id', checkUser, async (req, res) => {
+router.get('/allPlayer/:id', checkUser, async (req, res) => {
   try {
     const teamId = req.params.id;
-    console.log(teamId);
     const team = await Team.findById(teamId);
     const player = await Player.find({ team: teamId }).populate('team');
 
@@ -57,6 +56,7 @@ router.get('/team/:id', checkUser, async (req, res) => {
 });
 
 router.get('/playerDetail/:id', checkUser, playerController.playerDetailGet);
+
 
 // Define the routes for searching books
 router.get('/searchResult', checkUser, playerController.searchGet);

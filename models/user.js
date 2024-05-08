@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: "profile-1.png",
+        default: "/images/profile-1.png",
         require: true
     },
     email: {
