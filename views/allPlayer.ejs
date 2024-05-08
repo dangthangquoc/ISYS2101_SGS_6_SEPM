@@ -105,14 +105,22 @@
                                 <h3> <%= team.teamName %> </h3>
                             </div>
                         </div>
+                        <thead>
+                            <tr>
+                                <th> Photo </th>
+                                <th> Name </th>
+                                <th> Position </th>
+                                <th> DoB </th>
+                                <th> Transfer Price </th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <% player.forEach(player => { %>
                             <tr>
                             <td><img src="<%= player.playerImage %>" alt="<%= player.playerName %>"></td>
                               <td><a href="/player/<%=player.id%>"><%= player.playerName %></a></td>
-                              <td><%= player.Squad %></a></td>
                               <td><%= player.position %></td>
-                              <td><%= player.Age %></td>
+                              <td><%= player.dob %></td>
                               <td><strong><%= player.transferPrice %></strong></td>
                             </tr>
                             <% }) %>

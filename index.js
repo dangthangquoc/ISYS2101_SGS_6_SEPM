@@ -123,90 +123,18 @@ app.get('/myAccount', requireAuth, checkUser, async (req, res) => {
       next();
       return;
     }
+
+    console.log('here:', user);
   
-    // const team = await Team.find();
-    // Fetch the user's details and populate their deals
-    // const userDetails = await User.findById(user._id)
-    //   .populate('deals')
-    //   .exec();
-  
-    // If the user details are not found, return a 404 error
-    if (!userDetails) {
-      console.error('User not found:', userDetails._id);
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
-  
-    // Fetch all transactions
-    // const transactions = await Transaction.find();
-  
-    // Update the status and fine of overdue transactions
-    // await Promise.all(transactions.map(async (transaction) => {
-    //   if ((transaction.returnDate < Date.now() && transaction.status == 'Reserved') || (transaction.returnDate < Date.now() && transaction.status == 'Overdue')) {
-    //     await Transaction.findByIdAndUpdate(
-    //       transaction._id,
-    //       {
-    //         $set: {
-    //           status: 'Overdue',
-    //           fine: 1000 * Math.floor((Date.now() - new Date(transaction.returnDate)) / (1000 * 60 * 60 * 24))
-    //         }
-    //       },
-    //       { new: true },
-    //     );
-    //   }
-    // }));
-  
-    // Fetch the book details for each of the user's active transactions
-    // const allActiveTransactions = await Promise.all(
-    //   userDetails.activeTransactions.map(async (transaction) => {
-    //     const book = await getBookById(transaction.bookId);
-    //     return {
-    //       bookTitle: book.title,
-    //       status: transaction.status,
-    //       pickUpDate: transaction.pickUpDate,
-    //       returnDate: transaction.returnDate,
-    //       fine: transaction.fine,
-    //     };
-    //   })
-    // );
-  
-    // Fetch the book details for each of the user's previous transactions
-    // const allPrevTransactions = await Promise.all(
-    //   userDetails.prevTransactions.map(async (transaction) => {
-    //     const book = await getBookById(transaction.bookId);
-    //     return {
-    //       bookTitle: book.title,
-    //       status: transaction.status,
-    //       pickUpDate: transaction.pickUpDate,
-    //       returnDate: transaction.returnDate,
-    //       fine: transaction.fine,
-    //     };
-    //   })
-    // );
-  
-    // // Fetch the user and book details for each transaction
-    // const transactionsWithDetails = await Promise.all(
-    //   transactions.map(async (transaction) => {
-    //     const user = await User.findById(transaction.userId).exec();
-    //     const book = await Book.findById(transaction.bookId).exec();
-  
-    //     const userEmail = user ? user.email : 'User not found';
-    //     const bookTitle = book ? book.title : 'Book not found';
-  
-    //     return {
-    //       _id: transaction._id,
-    //       userEmail: userEmail,
-    //       bookTitle: bookTitle,
-    //       status: transaction.status,
-    //       pickUpDate: transaction.pickUpDate,
-    //       returnDate: transaction.returnDate,
-    //       fine: transaction.fine,
-    //     };
-    //   })
-    // );
-  
+    // // If the user details are not found, return a 404 error
+    // if (!userDetails) {
+    //   console.error('User not found:', userDetails._id);
+    //   return res.status(404).json({ success: false, message: 'User not found' });
+    // }
+
     // Render the 'myAccount' page with the fetched data
-    res.render('myAccount', { user: user, player: player, team: team});
-  
+    res.render('myAccount', { user: user });
+
   } catch (error) {
     // Log any error that occurs and return a 500 error
     console.error('Error processing transactions:', error);
