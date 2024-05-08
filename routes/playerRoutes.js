@@ -4,6 +4,8 @@ const { checkUser } = require('../middleware/authMiddleware');
 const playerController = require('../controllers/playerControllers');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
+const Team = require('../models/team');
+const Player = require('../models/player');
 
 // Initialize the Express router
 const router = express.Router();
@@ -35,6 +37,25 @@ const playerImageUpload = multer({ storage: playerImageStorage });
 
 // Define the routes for book details
 router.get('/allPlayer', checkUser, playerController.allPlayerGet);
+// playerRoutes.js
+router.get('/team/:id', checkUser, async (req, res) => {
+  try {
+    const teamId = req.params.id;
+    console.log(teamId);
+    const team = await Team.findById(teamId);
+    const player = await Player.find({ team: teamId }).populate('team');
+
+    if (team) {
+      res.render('allPlayer', { team, player });
+    } else {
+      res.status(404).send('Team not found');
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving team information');
+  }
+});
+
 router.get('/playerDetail/:id', checkUser, playerController.playerDetailGet);
 
 // Define the routes for searching books
