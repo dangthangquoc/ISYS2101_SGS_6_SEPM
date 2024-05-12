@@ -119,27 +119,21 @@ nav .search-bar input[type="search"] {
 nav .search-bar input[type="search"]::placeholder{
     color: var(--color-gray-dark);
 }
-nav .profile-area{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-}
 aside .profile-area {
     padding: 20px; /* Adjust as needed */
     background-color: #5c8adb; /* Background color for the profile area */
     border-bottom: 1px solid #ccc; /* Add a border at the bottom of the profile area */
     border-radius: 5%;
     margin: 15px 0;
-    display: flex;
+    display: flow-root;
 }
-aside .profile-area .profileName{
-    font-size: large;
+aside .profile-area .profileName h3{
+    font-size: 15px;
     margin-top: 10px;
 }
 aside .profile-photo {
-    width: 3.5rem; /* Set the width of the profile photo */
-    height: 3.5rem; /* Set the height of the profile photo */
+    width: 4rem; /* Set the width of the profile photo */
+    height: 4rem; /* Set the height of the profile photo */
     border-radius: 50%; /* Make the profile photo round */
     overflow: hidden;
     margin-right: 20px; /* Add space between the profile photo and profile name */
