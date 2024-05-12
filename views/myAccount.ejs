@@ -85,7 +85,6 @@
         </aside>
 
         <!--Middle Section-->
-<<<<<<< Updated upstream
         <section class="middle">
             <main class="table" id="customers_table">
             
@@ -109,75 +108,12 @@
                                     </ul>
                                 </div>
                             </div>
-        
-            
-    
-    <!-- add librarian -->
-    <script>
-        document.addEventListener('click', async function(event) {
-            if (event.target.id === 'addLibrarianBtn') {
-                event.preventDefault();
-        
-                const fullName = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-        
-                if (password !== confirmPassword) {
-                    alert('Passwords do not match');
-                    return;
-                }
-        
-                try {
-                    const res = await fetch('/create-librarian-account', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ fullName: fullName, email: email, password: password }),
-                    });
-                    const data = await res.json();
-                    if (data.error) {
-                        let errorMessage = '';
-                        if (data.error.includes('E11000 duplicate key error')) {
-                            errorMessage += 'This email is already registered';
-                        }
-                        if (data.error.includes('Minimum password length is 6 characters')) {
-                            errorMessage += 'Password must be at least 6 characters';
-                        }
-                        alert(errorMessage);
-                    }
-        
-                    if (data.user) {  
-                        alert('Librarian account created successfully');
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-            }
-        });
-        </script>
-=======
-        <div class="main-part">
-            <!-- Right Half - General Information, Contact Information, Profile Image, and Name -->
-            <div class="leftContainer">
-                <div id="tab1" class="tab-content tab1 active">
-                    <div class="text-center">
-                        <img src="<%= user.profileImage %>" alt="Profile Picture" class="profilePic" id="profilePic">
-                        <a href="/updateUser"><button id="editBtn">Edit Profile</button></a> 
+                        </div>
                     </div>
-                    <div class="generalInfo">
-                        <h3 class="heading">General Information</h3>
-                        <ul id="generalInfoList">
-                            <li>Full Name: <span id="fullName"><%= user.fullName %></span></li>
-                            <!-- <li>Date of Birth: <span id="dob">January 1, 1990</span></li> -->
-                            <!-- <li>Gender: <span id="gender">Male</span></li> -->
-                            <li>Email Address: <span id="email"><%= user.email %></span></li>
-                            <li>Phone Number: <span id="phone"><%= user.phone %></span></li>
-                        </ul>
-                    </div>
-                </div>
->>>>>>> Stashed changes
+                </section>
+            </main>
+        </section>
+
  
     
         <!-- Search -->
