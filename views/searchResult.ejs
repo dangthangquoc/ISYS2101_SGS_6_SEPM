@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deal Page</title>
+    <title>Main Page</title>
 
    
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
     <!-- navbar -->
     <nav>
         <div class="container">
-            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
+            <a href="/"><img src="/images/fsrs.png" class="logo" alt="logo"></a>
             <div class="search-bar">
                 <span class="material-icons-sharp">search</span>
                 <input type="search" placeholder="Search">
@@ -88,30 +88,19 @@
             <main class="table" id="customers_table">
             
                 <section class="table__body">
-                </section>
-            </main>
-            <section class="footer">
+                    <h1 class="heading"> <span>Search result for "<%= searchQuery %>"</span> </h1>
 
-                <div class="box-container">
-        
-                    <div class="box">
-                        <h3>extra links</h3>
-                        <a href="/information#aboutUs"> <i class="fas fa-arrow-right"></i> about us </a>
-                        <a href="/information#copyRight"> <i class="fas fa-arrow-right"></i> copyright </a>
-                        <a href="/information#privatePolicy"> <i class="fas fa-arrow-right"></i> privacy policy </a>
-                        <a href="/information#paymentMethod"> <i class="fas fa-arrow-right"></i> payment method </a>
+                    <div class="allbook">
+                        <% player.forEach((player) => { %>
+                            <a href="/playerDetail/<%=player.id%>" class="swiper-slide box">
+                                <div class="image">
+                                    <img src="<%=player.playerImage%>" alt="">
+                                </div>
+                                <div class="content">
+                                    <h3><%=player.playerName%></h3>
+                                    <div class="author"><%=team.teamName%></div>
+                                </div>
+                            </a>
+                        <% }) %>
                     </div>
-        
-                    <div class="box">
-                        <h3>contact info</h3>
-                        <a href="https://www.facebook.com/profile.php?id=100010671730129" target="_blank"> <i class='far fa-id-badge'></i> Dang Trung Hieu - s3911594 </a>
-                        <a href="https://www.facebook.com/hieule2712" target="_blank"> <i class='far fa-id-badge'></i> Le Trung Hieu - s3818683 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100015410506068" target="_blank"> <i class='far fa-id-badge'></i> Luu Van Thien Toan - s3979512 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100014016729432" target="_blank"> <i class='far fa-id-badge'></i> Dang Quoc Thang - s3977877 </a>
-                    </div>
-        
-                </div>
-        
-                <div class="credit"> created by <span>Group 6</span> | all rights reserved! </div>
-        
-            </section>
+                </section>
