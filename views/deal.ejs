@@ -54,28 +54,25 @@
           <span class="material-icons-sharp">close</span>
         </button>
         <div class="sidebar">
-          <% if (user) { %>
-          <div class="profile-area">
-            <div class="profile-photo">
-              <img
-                src="<%= user.profileImage %>"
-                alt="<%= user.fullName %> Profile Picture"
-              />
-            </div>
-            <div class="profileName">
-              <h3><%= user.fullName %></h3>
-            </div>
-            <a href="#">
-              <span class="material-icons-sharp">settings</span>
-              <h4>Edit</h4>
-            </a>
-          </div>
-          <%} else { %>
-          <a href="/login" class="">
-            <span class="material-icons-sharp">login</span>
-            <h4>Login/Sign Up</h4>
-          </a>
-          <%} %>
+            <% if (user) { %>
+                <div class="profile-area">
+                    <div class="profile-photo">
+                        <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                    </div>
+                    <div class="profileName">
+                        <h3> <%= user.fullName %> </h3>
+                    </div>
+                    <a href="/myAccount">
+                        <span class="material-icons-sharp">settings</span>
+                        <h4>Edit</h4>
+                    </a>
+                </div>
+                <%} else { %>
+                    <a href="/login" class="">
+                        <span class="material-icons-sharp">login</span>
+                        <h4>Login/Sign Up</h4>
+                    </a>
+                <%} %>
           <a href="/">
             <span class="material-icons-sharp">dashboard</span>
             <h4>Dashboard</h4>
