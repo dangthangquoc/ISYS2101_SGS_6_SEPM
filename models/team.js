@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const teamSchema = new mongoose.Schema({
@@ -34,12 +33,23 @@ const teamSchema = new mongoose.Schema({
     },
     player: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'player'
-    }],
-},
-    {
-        timestamps: true
-});
+        ref: 'player',
+      },
+    ],
+    profit_1_month: {
+      type: String,
+    },
+    profit_3_month: {
+      type: String,
+    },
+    profit_12_month: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 teamSchema.post('save', function (doc, next) {
     console.log('New team was created & saved', doc);

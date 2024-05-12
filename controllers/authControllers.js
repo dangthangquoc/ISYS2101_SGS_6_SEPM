@@ -93,34 +93,6 @@ module.exports.signUpPost = async (req, res) => {
     }
 };
 
-// module.exports.createLibrarianAccountPost = async (req, res) => {
-//     const { fullName, email, password } = req.body;
-
-//     try {
-//         // Create a new user
-//         const newUser = new User({
-//             fullName: req.body.fullName,
-//             email: req.body.email,
-//             password: req.body.password, // Save the hashed password
-//             isAdmin: true,
-//         });
-
-//         // Save User and Return
-//         newUser.save()
-//             .then((user) => {
-//                 res.status(200).json({ user: user._id });
-//             })
-//             .catch((err) => {
-//                 let error = handleErrors(err);
-//                 res.status(500).json({ error: err.message });
-//             }
-//             );
-
-//     } catch (err) {
-//         let error = handleErrors(err);
-//         res.status(400).json({ error });
-//     }
-// };
 
 // Function for Login (Get & Post method)
 module.exports.loginGet = (req, res) => {

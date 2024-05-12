@@ -1,117 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deal Page</title>
 
-   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
 
-</head>
-<body>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/images/fsrs.png" />
+  </head>
+  <body>
     <!-- navbar -->
     <nav>
-        <div class="container">
-            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-            <div class="search-bar">
-                <span class="material-icons-sharp">search</span>
-                <input type="search" placeholder="Search">
-            </div>
-            <div class="profile-area">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">menu</span>
-                </button>
-            </div>
+      <div class="container">
+        <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo" /></a>
+        <div class="search-bar">
+          <span class="material-icons-sharp">search</span>
+          <input type="search" placeholder="Search" />
         </div>
+        <div class="profile-area">
+          <button id="menu-btn">
+            <span class="material-icons-sharp">menu</span>
+          </button>
+        </div>
+      </div>
     </nav>
 
     <!-- main -->
 
     <main>
-
-        <!-- aside -->
-        <aside>
-            <button id="close-btn">
-                <span class="material-icons-sharp">close</span>
-            </button>
-            <div class="sidebar">
-                <% if (user) { %>
-                    <div class="profile-area">
-                        <div class="profile-photo">
-                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
-                        </div>
-                        <div class="profileName">
-                            <h3> <%= user.fullName %> </h3>
-                        </div>
-                        <a href="#">
-                            <span class="material-icons-sharp">settings</span>
-                            <h4>Edit</h4>
-                        </a>
-                    </div>
-                    <%} else { %>
-                        <a href="/login" class="">
-                            <span class="material-icons-sharp">login</span>
-                            <h4>Login/Sign Up</h4>
-                        </a>
-                    <%} %>
-                <a href="/" class="active"> 
-                    <span class="material-icons-sharp">dashboard</span>
-                    <h4>Dashboard</h4>
-                </a>
-                <a href="/deal">
-                    <span class="material-icons-sharp">currency_exchange</span>
-                    <h4>Deals</h4>
-                </a>
-                <a href="/information">
-                    <span class="material-icons-sharp">help_center</span>
-                    <h4>Information</h4>
-                </a>
-                <% if (user) {%>
-                <a href="/logout">
-                    <span class="material-icons-sharp">logout</span>
-                    <h4>Logout</h4>
-                </a>
-                <%} %>
+      <!-- aside -->
+      <aside>
+        <button id="close-btn">
+          <span class="material-icons-sharp">close</span>
+        </button>
+        <div class="sidebar">
+          <% if (user) { %>
+          <div class="profile-area">
+            <div class="profile-photo">
+              <img
+                src="<%= user.profileImage %>"
+                alt="<%= user.fullName %> Profile Picture"
+              />
             </div>
-        </aside>
+            <div class="profileName">
+              <h3><%= user.fullName %></h3>
+            </div>
+            <a href="#">
+              <span class="material-icons-sharp">settings</span>
+              <h4>Edit</h4>
+            </a>
+          </div>
+          <%} else { %>
+          <a href="/login" class="">
+            <span class="material-icons-sharp">login</span>
+            <h4>Login/Sign Up</h4>
+          </a>
+          <%} %>
+          <a href="/" class="active">
+            <span class="material-icons-sharp">dashboard</span>
+            <h4>Dashboard</h4>
+          </a>
+          <a href="/deal">
+            <span class="material-icons-sharp">currency_exchange</span>
+            <h4>Deals</h4>
+          </a>
+          <a href="/information">
+            <span class="material-icons-sharp">help_center</span>
+            <h4>Information</h4>
+          </a>
+          <% if (user) {%>
+          <a href="/logout">
+            <span class="material-icons-sharp">logout</span>
+            <h4>Logout</h4>
+          </a>
+          <%} %>
+        </div>
+      </aside>
 
-        <!--Middle Section-->
-        <section class="middle">
-            <main class="table" id="customers_table">
-            
-                <section class="table__body">
-                </section>
-            </main>
-            <section class="footer">
+      <!--Middle Section-->
+      <section class="middle">
+        <main class="table">
+          <div class="bg-white p-8 rounded-lg shadow-lg w-full h-full text-xl">
+            <form class="">
+              <div class="mb-4">
+                <label
+                  for="initialBudget"
+                  class="block text-gray-700 font-bold mb-2"
+                  >Initial Budget ($)</label
+                >
+                <input
+                  type="number"
+                  id="initialBudget"
+                  name="initialBudget"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter initial budget"
+                  value="<%= query.initialBudget || 0 %>"
+                />
+              </div>
 
-                <div class="box-container">
-        
-                    <div class="box">
-                        <h3>extra links</h3>
-                        <a href="/information#aboutUs"> <i class="fas fa-arrow-right"></i> about us </a>
-                        <a href="/information#copyRight"> <i class="fas fa-arrow-right"></i> copyright </a>
-                        <a href="/information#privatePolicy"> <i class="fas fa-arrow-right"></i> privacy policy </a>
-                        <a href="/information#paymentMethod"> <i class="fas fa-arrow-right"></i> payment method </a>
-                    </div>
-        
-                    <div class="box">
-                        <h3>contact info</h3>
-                        <a href="https://www.facebook.com/profile.php?id=100010671730129" target="_blank"> <i class='far fa-id-badge'></i> Dang Trung Hieu - s3911594 </a>
-                        <a href="https://www.facebook.com/hieule2712" target="_blank"> <i class='far fa-id-badge'></i> Le Trung Hieu - s3818683 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100015410506068" target="_blank"> <i class='far fa-id-badge'></i> Luu Van Thien Toan - s3979512 </a>
-                        <a href="https://www.facebook.com/profile.php?id=100014016729432" target="_blank"> <i class='far fa-id-badge'></i> Dang Quoc Thang - s3977877 </a>
-                    </div>
-        
+              <div class="mb-4">
+                <label
+                  for="targetProfit"
+                  class="block text-gray-700 font-bold mb-2"
+                  >Target Profit ($)</label
+                >
+                <input
+                  type="number"
+                  id="targetProfit"
+                  name="targetProfit"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Enter target profit (optional)"
+                  value="<%= query.targetProfit || 0 %>"
+                />
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2"
+                  >Desired Period</label
+                >
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="oneMonth" name="period" value="1"
+                  class="form-radio h-5 w-5 text-blue-600" <% if (query.period
+                  == 1) { %> checked <% } %> />
+                  <label for="oneMonth" class="ml-2 text-gray-700"
+                    >1 month</label
+                  >
                 </div>
-        
-                <div class="credit"> created by <span>Group 6</span> | all rights reserved! </div>
-        
-            </section>
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="threeMonths" name="period" value="3"
+                  class="form-radio h-5 w-5 text-blue-600" <% if (query.period
+                  == 3) { %> checked <% } %> />
+                  <label for="threeMonths" class="ml-2 text-gray-700"
+                    >3 months</label
+                  >
+                </div>
+                <div class="flex items-center mb-2">
+                  <input type="radio" id="twelveMonths" name="period" value="12"
+                  class="form-radio h-5 w-5 text-blue-600" <% if (query.period
+                  == 12) { %> checked <% } %> />
+                  <label for="twelveMonths" class="ml-2 text-gray-700"
+                    >12 months</label
+                  >
+                </div>
+              </div>
+
+              <div class="flex justify-center gap-8">
+                <button
+                  type="submit"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[50%] transition-colors duration-200"
+                >
+                  Get best deals
+                </button>
+              </div>
+            </form>
+
+            <table class="hidden mt-4" id="deals-table">
+              <thead>
+                <tr>
+                  <th>Team</th>
+                  <th>Name</th>
+                  <th>Squad Size</th>
+                  <th>Market Value</th>
+                  <th>Avg Players Value</th>
+                  <th>Average Age</th>
+                  <th>Current Transfer Record</th>
+                  <th>Estimated Profit</th>
+                </tr>
+              </thead>
+              <tbody id="deals"></tbody>
+            </table>
+          </div>
+        </main>
+        <section class="footer">
+          <div class="box-container">
+            <div class="box">
+              <h3>extra links</h3>
+              <a href="/information#aboutUs">
+                <i class="fas fa-arrow-right"></i> about us
+              </a>
+              <a href="/information#copyRight">
+                <i class="fas fa-arrow-right"></i> copyright
+              </a>
+              <a href="/information#privatePolicy">
+                <i class="fas fa-arrow-right"></i> privacy policy
+              </a>
+              <a href="/information#paymentMethod">
+                <i class="fas fa-arrow-right"></i> payment method
+              </a>
+            </div>
+
+            <div class="box">
+              <h3>contact info</h3>
+              <a
+                href="https://www.facebook.com/profile.php?id=100010671730129"
+                target="_blank"
+              >
+                <i class="far fa-id-badge"></i> Dang Trung Hieu - s3911594
+              </a>
+              <a href="https://www.facebook.com/hieule2712" target="_blank">
+                <i class="far fa-id-badge"></i> Le Trung Hieu - s3818683
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100015410506068"
+                target="_blank"
+              >
+                <i class="far fa-id-badge"></i> Luu Van Thien Toan - s3979512
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100014016729432"
+                target="_blank"
+              >
+                <i class="far fa-id-badge"></i> Dang Quoc Thang - s3977877
+              </a>
+            </div>
+          </div>
+
+          <div class="credit">
+            created by <span>Group 6</span> | all rights reserved!
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template>
+      <tr>
+        <td>
+          <img src="" alt="" />
+        </td>
+        <td><a href=""></a></td>
+        <td id="squad-size"></td>
+        <td id="market-value"></td>
+        <td id="avg-player-value"></td>
+        <td id="avgAge"></td>
+        <td id="transferRecord"></td>
+        <td id="estimated-profit" class="font-bold"></td>
+      </tr>
+    </template>
+
+    <script>
+      $('form').on('submit', async (e) => {
+        e.preventDefault();
+
+        const initialBudget = $('#initialBudget').val();
+        const targetProfit = $('#targetProfit').val();
+        const period = $('input[name="period"]:checked').val();
+
+        if (!initialBudget || !period) {
+          alert('Please fill in all fields');
+          return;
+        }
+
+        if (targetProfit) {
+          if (targetProfit < 0) {
+            alert('Target profit must be a positive number');
+            return;
+          }
+        }
+
+        $('button[type="submit"]')
+          .attr('disabled', true)
+          .text('Getting deals...');
+
+        const resp = await fetch('/getDeals', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            initialBudget,
+            targetProfit,
+            period,
+          }),
+        });
+
+        if (!resp.ok) {
+          alert('An error occurred while getting deals');
+          $('button[type="submit"]')
+            .attr('disabled', false)
+            .text('Get best deals');
+          return;
+        }
+
+        const deals = await resp.json();
+
+        $('#error-text').remove();
+
+        if (!deals.length) {
+          $('#deals-table').addClass('hidden');
+
+          $('#deals-table').after(
+            '<p class="text-center text-xl mt-8 text-red-500" id="error-text">No deals found!</p>'
+          );
+
+          $('button[type="submit"]')
+            .attr('disabled', false)
+            .text('Get best deals');
+          return;
+        }
+
+        $('#deals-table').removeClass('hidden');
+
+        $('#deals').empty();
+
+        deals.forEach((deal) => {
+          const $template = $('template').contents().clone();
+
+          $template.find('img').attr('src', deal.teamImage);
+
+          $template
+            .find('a')
+            .attr('href', `/allPlayer/${deal._id}`)
+            .text(deal.teamName);
+
+          $template.find('#squad-size').text(deal.squadSize);
+          $template.find('#market-value').text(deal.marketValue);
+          $template.find('#avg-player-value').text(deal.avgPlayerValue);
+          $template.find('#avgAge').text(deal.avgAge);
+          $template.find('#transferRecord').text(deal.currentTransferRecord);
+          $template.find('#estimated-profit').text(`\$${deal.estimatedProfit}`);
+
+          $('#deals').append($template);
+        });
+
+        $('button[type="submit"]')
+          .attr('disabled', false)
+          .text('Get best deals');
+      });
+    </script>
+  </body>
+</html>

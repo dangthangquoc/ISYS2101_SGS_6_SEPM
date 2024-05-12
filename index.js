@@ -13,6 +13,7 @@ const Agenda = require('agenda');
 // Importing routes
 const authRoutes = require('./routes/authRoutes');
 const playerRoutes = require('./routes/playerRoutes');
+const dealRoutes = require('./routes/dealRoutes');
 
 // Importing middleware
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
@@ -23,7 +24,7 @@ const { getUserById, getPlayerById } = require('./middleware/nameMiddleware');
 const User = require('./models/user');
 const Team = require('./models/team');
 const Player = require('./models/player');
-const Deal = require('./models/deal')
+const Deal = require('./models/deal');
 
 // Initializing express app
 const app = express();
@@ -55,7 +56,7 @@ app.use(
 // Setting up routes
 app.use(authRoutes);
 app.use(playerRoutes);
-
+app.use(dealRoutes);
 
 // Database Connection
 const mongoURI = 'mongodb+srv://sepm:sepm123@cluster0.uuar0ah.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';

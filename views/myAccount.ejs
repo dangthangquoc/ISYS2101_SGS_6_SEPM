@@ -85,6 +85,7 @@
         </aside>
 
         <!--Middle Section-->
+<<<<<<< Updated upstream
         <section class="middle">
             <main class="table" id="customers_table">
             
@@ -156,6 +157,27 @@
             }
         });
         </script>
+=======
+        <div class="main-part">
+            <!-- Right Half - General Information, Contact Information, Profile Image, and Name -->
+            <div class="leftContainer">
+                <div id="tab1" class="tab-content tab1 active">
+                    <div class="text-center">
+                        <img src="<%= user.profileImage %>" alt="Profile Picture" class="profilePic" id="profilePic">
+                        <a href="/updateUser"><button id="editBtn">Edit Profile</button></a> 
+                    </div>
+                    <div class="generalInfo">
+                        <h3 class="heading">General Information</h3>
+                        <ul id="generalInfoList">
+                            <li>Full Name: <span id="fullName"><%= user.fullName %></span></li>
+                            <!-- <li>Date of Birth: <span id="dob">January 1, 1990</span></li> -->
+                            <!-- <li>Gender: <span id="gender">Male</span></li> -->
+                            <li>Email Address: <span id="email"><%= user.email %></span></li>
+                            <li>Phone Number: <span id="phone"><%= user.phone %></span></li>
+                        </ul>
+                    </div>
+                </div>
+>>>>>>> Stashed changes
  
     
         <!-- Search -->
