@@ -28,7 +28,7 @@ const Deal = require('./models/deal');
 
 // Initializing express app
 const app = express();
-const port = 5000;
+const port = 3000;
 
 // Setting up middleware
 app.use(express.urlencoded({ extended: true }));
