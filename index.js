@@ -108,6 +108,14 @@ app.get('/information', (req, res) => {
   res.render('information');
 });
 
+app.get('/copyright', (req, res) => {
+  res.render('copyright');
+});
+
+app.get('/privacyPolicy', (req, res) => {
+  res.render('privacyPolicy');
+});
+
 app.get('/playerDetail', (req, res) => {
   res.render('playerDetail');
 });
