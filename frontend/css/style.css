@@ -125,18 +125,21 @@ aside .profile-area {
     border-bottom: 1px solid #ccc; /* Add a border at the bottom of the profile area */
     border-radius: 5%;
     margin: 15px 0;
-    display: flow-root;
+    display: flex;
 }
 aside .profile-area .profileName h3{
     font-size: 15px;
     margin-top: 10px;
+}
+aside .profile-area .profileName h3{
+    padding: 0;
 }
 aside .profile-photo {
     width: 4rem; /* Set the width of the profile photo */
     height: 4rem; /* Set the height of the profile photo */
     border-radius: 50%; /* Make the profile photo round */
     overflow: hidden;
-    margin-right: 20px; /* Add space between the profile photo and profile name */
+    margin-right: 5px; /* Add space between the profile photo and profile name */
 }
 
 aside .profile-area a{
@@ -191,7 +194,7 @@ main aside .sidebar a{
 }
 main aside .sidebar a span{
     font-size: 1.7rem;
-    margin-left: 3rem;
+    margin-left: 7px;
     transition: all 0.3s;
 }
 main aside .sidebar a.active{
