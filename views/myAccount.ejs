@@ -22,10 +22,6 @@
     <nav>
         <div class="container">
             <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-            <div class="search-bar">
-                <span class="material-icons-sharp">search</span>
-                <input type="search" placeholder="Search">
-            </div>
             <div class="profile-area">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
@@ -148,92 +144,8 @@
 
  
     
-        <!-- Search -->
-        <script>
-            document.getElementById('searchInputreservation').addEventListener('keyup', function() {
-                const searchValue = this.value.toLowerCase();
-                const rows = document.querySelectorAll('#bookTable tbody tr');
+
         
-                rows.forEach(row => {
-                    const cells = Array.from(row.getElementsByClassName('searchablereservation'));
-                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-        
-                    if (cellText.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-        <script>
-            document.getElementById('searchInputborrow').addEventListener('keyup', function() {
-                const searchValue = this.value.toLowerCase();
-                const rows = document.querySelectorAll('#bookTable tbody tr');
-    
-                rows.forEach(row => {
-                    const cells = Array.from(row.getElementsByClassName('searchableborrow'));
-                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-    
-                    if (cellText.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-        <script>
-            document.getElementById('searchInputreturn').addEventListener('keyup', function() {
-                const searchValue = this.value.toLowerCase();
-                const rows = document.querySelectorAll('#bookTable tbody tr');
-    
-                rows.forEach(row => {
-                    const cells = Array.from(row.getElementsByClassName('searchablereturn'));
-                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-    
-                    if (cellText.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-        <script>
-            document.getElementById('searchInputauthor').addEventListener('keyup', function() {
-                const searchValue = this.value.toLowerCase();
-                const rows = document.querySelectorAll('.styled-table tbody tr');
-    
-                rows.forEach(row => {
-                    const cells = Array.from(row.getElementsByClassName('searchableauthor'));
-                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-    
-                    if (cellText.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-        <script>
-            document.getElementById('searchInputpublisher').addEventListener('keyup', function() {
-                const searchValue = this.value.toLowerCase();
-                const rows = document.querySelectorAll('.styled-table tbody tr');
-        
-                rows.forEach(row => {
-                    const cells = Array.from(row.getElementsByClassName('searchablepublisher'));
-                    const cellText = cells.map(cell => cell.textContent.toLowerCase()).join(' ');
-        
-                    if (cellText.includes(searchValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        </script>
     
     <script>
         // Get the search icon and form elements

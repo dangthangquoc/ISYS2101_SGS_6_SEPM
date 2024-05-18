@@ -99,26 +99,6 @@ nav img.logo {
     width: 5rem;
     height: 4rem;
 }
-nav .search-bar{
-    background: var(--color-light);
-    padding: 8px 1.6rem;
-    width: 32vw;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: rgb(122, 120, 120);
-    position: absolute;
-    left: 15%;
-}
-nav .search-bar input[type="search"] {
-    color: var(--color-dark);
-    border: none;
-    width: 100%;
-}
-nav .search-bar input[type="search"]::placeholder{
-    color: var(--color-gray-dark);
-}
 aside .profile-area {
     padding: 20px; /* Adjust as needed */
     background-color: #5c8adb; /* Background color for the profile area */
@@ -432,7 +412,7 @@ tbody tr.hide td img {
 }
 .table {
     background-color: #fff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding-right: 10px;

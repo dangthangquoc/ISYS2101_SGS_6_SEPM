@@ -66,10 +66,6 @@
     <nav>
         <div class="container">
             <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-            <div class="search-bar">
-                <span class="material-icons-sharp">search</span>
-                <input type="search" placeholder="Search">
-            </div>
             <div class="profile-area">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
@@ -204,16 +200,4 @@
 
 
 </html>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Remove active class from all links
-            sidebarLinks.forEach(link => link.classList.remove('active'));
-            // Add active class to the clicked link
-            this.classList.add('active');
-        });
-    });
-});
-</script>
+<script src="js/simpleScript.js"></script>
