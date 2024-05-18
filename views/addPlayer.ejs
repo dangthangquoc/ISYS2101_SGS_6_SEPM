@@ -13,6 +13,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
     <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
 
 </head>
@@ -62,7 +63,7 @@
                         <h4>Login/Sign Up</h4>
                     </a>
                 <%} %>
-            <a href="/" class="active"> 
+            <a href="/" class=""> 
                 <span class="material-icons-sharp">dashboard</span>
                 <h4>Dashboard</h4>
             </a>
@@ -74,7 +75,7 @@
                 <span class="material-icons-sharp">help_center</span>
                 <h4>Information</h4>
             </a>
-            <a href="/addPlayer" class="">
+            <a href="/addPlayer" class="active">
                 <span class="material-icons-sharp">person_add</span>
                 <h4>Add Player</h4>
             </a>
@@ -94,48 +95,55 @@
         <!--Middle Section-->
         <section class="middle">
             <main class="table" id="customers_table">
-            
+
               <section class="table__body">
                 <div class="addForm">
-                  <form enctype="multipart/form-data" action="/addplayer">
-                    <h1>Add Player</h1>
-                    <br>
-                    <label for="playerImage">Player Image</label>
-                    <input type="file" name="playerImage" />
-                    <div class="playerImage error"></div>
-                    <br>
-                
-                    <lable for="playerName">playerName</lable>
-                    <input type="text" name="playerName"/>
-                    <div class="playerName error"></div>
-                    <br>
-                
-                    <lable for="position">position</lable>
-                    <input type="text" name="position"/>
-                    <div class="position error"></div>
-                    <br>
-                
-                    <lable for="dob">dob</lable>
-                    <input type="date" name="dob"/>
-                    <div class="dob error"></div>
-                    <br>
-                
-                    <lable for="transferPrice">transferPrice</lable>
-                    <input type="text" name="transferPrice"/>
-                    <div class="transferPrice error"></div>
-                    <br>
-                
-                
-                    <label for="team">Select an Team:</label>
-                    <select id="team" name="team">
-                      <% team.forEach(team => { %>
-                        <option value="<%= team._id %>" name="team"><%= team.teamName %></option>
-                      <% }); %>
-                    </select>
-                    <div class="team error"></div>
-                    <br>
-                    <button type="submit">Add</button>
-                </form>
+                    <form enctype="multipart/form-data" action="/addplayer" method="POST">
+                        <h1>Add Player</h1>
+                        <div class="form-group">
+                            <label for="playerImage">Player Image</label>
+                            <input type="file" name="playerImage" id="playerImage" class="form-control"/>
+                            <div class="error playerImage-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="playerName">Player Name</label>
+                            <input type="text" name="playerName" id="playerName" class="form-control"/>
+                            <div class="error playerName-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="position">Position</label>
+                            <input type="text" name="position" id="position" class="form-control"/>
+                            <div class="error position-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" class="form-control"/>
+                            <div class="error dob-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="transferPrice">Transfer Price</label>
+                            <input type="text" name="transferPrice" id="transferPrice" class="form-control"/>
+                            <div class="error transferPrice-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="team">Select a Team</label>
+                            <select id="team" name="team" class="form-control">
+                                <% team.forEach(team => { %>
+                                    <option value="<%= team._id %>"><%= team.teamName %></option>
+                                <% }); %>
+                            </select>
+                            <div class="error team-error"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
                 
                   <script>
                     const form = document.querySelector('form');
