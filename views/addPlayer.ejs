@@ -35,174 +35,174 @@
   </nav>
 
   <!-- main -->
+    <main class="table" id="customers_table">
 
-  <main>
+                <section class="table__body">
+                    <div>
+                        <form enctype="multipart/form-data" action="/addplayer" method="POST">
+                            <h1>Add Player</h1>
+                            <div class="form-group">
+                                <label for="playerImage">Player Image</label>
+                                <input type="file" name="playerImage" id="playerImage" class="form-control"/>
+                                <div class="error playerImage-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="playerName">Player Name</label>
+                                <input type="text" name="playerName" id="playerName" class="form-control"/>
+                                <div class="error playerName-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="position">Position</label>
+                                <input type="text" name="position" id="position" class="form-control"/>
+                                <div class="error position-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" name="dob" id="dob" class="form-control"/>
+                                <div class="error dob-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="transferPrice">Transfer Price</label>
+                                <input type="text" name="transferPrice" id="transferPrice" class="form-control"/>
+                                <div class="error transferPrice-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="team">Select a Team</label>
+                                <select id="team" name="team" class="form-control">
+                                    <% team.forEach(team => { %>
+                                        <option value="<%= team._id %>"><%= team.teamName %></option>
+                                    <% }); %>
+                                </select>
+                                <div class="error team-error"></div>
+                            </div>
+        
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    
+                        <script>
+                            const form = document.querySelector('form');
+                            // read the error
+                            const playerImageError = document.querySelector('.playerImage.error');
+                            const playerNameError = document.querySelector('.playerName.error');
+                            const positionError = document.querySelector('.position.error');
+                            const dobError = document.querySelector('.dob.error');
+                            const transferPriceError = document.querySelector('.transferPrice.error');
+                        
+                            form.addEventListener('submit', async (e) => {
+                                e.preventDefault();
+                                //reset errors
+                                playerImageError.textContent = '';
+                                playerNameError.textContent = '';
+                                positionError.textContent = '';
+                                dobError.textContent = '';
+                                transferPriceError.textContent = '';
+                        
+                                // Create a FormData instance
+                                const formData = new FormData();
+                                formData.append('playerName', form.playerName.value);
+                                formData.append('position', form.position.value);
+                                formData.append('dob', form.dob.value);
+                                formData.append('transferPrice', form.transferPrice.value);
+                                formData.append('team', form.team.value);
+                                if (form.playerImage.files.length > 0) {
+                                formData.append('playerImage', form.playerImage.files[0]);
+                                }
+                        
+                                console.log(formData);
+                                
+                                try{
+                                    const res = await fetch('/addplayer', {
+                                        method: 'POST',
+                                        body: formData, // Send the form data
+                                    });
+                                    const data = await res.json();
+                                    console.log(data);
+                        
+                                    if (data.errors){
+                                        playerImageError.textContent = data.errors.playerImage;
+                                        playerNameError.textContent = data.errors.playerName;
+                                        positionError.textContent = data.errors.position;
+                                        dobError.textContent = data.errors.dob;
+                                        transferPriceError.textContent = data.errors.transferPrice;
+                                    }
+                                    else{
+                                        descriptionError.textContent = ('Added successfully');
+                                    }
+                                }
+                                catch (err){
+                                    console.log(err);
+                                }
+                            });
+                        </script>
+                    </div>
+                </section>
+            </main>
+    <main>
 
       <!-- aside -->
-      <aside>
-        <button id="close-btn">
-            <span class="material-icons-sharp">close</span>
-        </button>
-        <div class="sidebar">
-            <% if (user) { %>
-                <div class="profile-area">
-                    <div class="profile-photo">
-                        <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons-sharp">close</span>
+            </button>
+            <div class="sidebar">
+                <% if (user) { %>
+                    <div class="profile-area">
+                        <div class="profile-photo">
+                            <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile Picture">
+                        </div>
+                        <div class="profileName">
+                            <h3> <%= user.fullName %> </h3>
+                        </div>
+                        <a href="/myAccount">
+                            <span class="material-icons-sharp">settings</span>
+                            <h4>Edit</h4>
+                        </a>
                     </div>
-                    <div class="profileName">
-                        <h3> <%= user.fullName %> </h3>
-                    </div>
-                    <a href="/myAccount">
-                        <span class="material-icons-sharp">settings</span>
-                        <h4>Edit</h4>
-                    </a>
-                </div>
-                <%} else { %>
-                    <a href="/login" class="">
-                        <span class="material-icons-sharp">login</span>
-                        <h4>Login/Sign Up</h4>
-                    </a>
+                    <%} else { %>
+                        <a href="/login" class="">
+                            <span class="material-icons-sharp">login</span>
+                            <h4>Login/Sign Up</h4>
+                        </a>
+                    <%} %>
+                <a href="/" class=""> 
+                    <span class="material-icons-sharp">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="/deal" class="">
+                    <span class="material-icons-sharp">currency_exchange</span>
+                    <h4>Deals</h4>
+                </a>
+                <a href="/information" class="">
+                    <span class="material-icons-sharp">help_center</span>
+                    <h4>Information</h4>
+                </a>
+                <a href="/addPlayer" class="active">
+                    <span class="material-icons-sharp">person_add</span>
+                    <h4>Add Player</h4>
+                </a>
+                <a href="/team" class="">
+                    <span class="material-icons-sharp">add_circle</span>
+                    <h4>Add Team</h4>
+                </a>
+                <% if (user) {%>
+                <a href="/logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h4>Logout</h4>
+                </a>
                 <%} %>
-            <a href="/" class=""> 
-                <span class="material-icons-sharp">dashboard</span>
-                <h4>Dashboard</h4>
-            </a>
-            <a href="/deal" class="">
-                <span class="material-icons-sharp">currency_exchange</span>
-                <h4>Deals</h4>
-            </a>
-            <a href="/information" class="">
-                <span class="material-icons-sharp">help_center</span>
-                <h4>Information</h4>
-            </a>
-            <a href="/addPlayer" class="active">
-                <span class="material-icons-sharp">person_add</span>
-                <h4>Add Player</h4>
-            </a>
-            <a href="/team" class="">
-                <span class="material-icons-sharp">add_circle</span>
-                <h4>Add Team</h4>
-            </a>
-            <% if (user) {%>
-            <a href="/logout">
-                <span class="material-icons-sharp">logout</span>
-                <h4>Logout</h4>
-            </a>
-            <%} %>
-        </div>
-    </aside>
+            </div>
+        </aside>
 
         <!--Middle Section-->
         <section class="middle">
-            <main class="table" id="customers_table">
-
-              <section class="table__body">
-                <div class="addForm">
-                    <form enctype="multipart/form-data" action="/addplayer" method="POST">
-                        <h1>Add Player</h1>
-                        <div class="form-group">
-                            <label for="playerImage">Player Image</label>
-                            <input type="file" name="playerImage" id="playerImage" class="form-control"/>
-                            <div class="error playerImage-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="playerName">Player Name</label>
-                            <input type="text" name="playerName" id="playerName" class="form-control"/>
-                            <div class="error playerName-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="position">Position</label>
-                            <input type="text" name="position" id="position" class="form-control"/>
-                            <div class="error position-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" class="form-control"/>
-                            <div class="error dob-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="transferPrice">Transfer Price</label>
-                            <input type="text" name="transferPrice" id="transferPrice" class="form-control"/>
-                            <div class="error transferPrice-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="team">Select a Team</label>
-                            <select id="team" name="team" class="form-control">
-                                <% team.forEach(team => { %>
-                                    <option value="<%= team._id %>"><%= team.teamName %></option>
-                                <% }); %>
-                            </select>
-                            <div class="error team-error"></div>
-                        </div>
-    
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
-                
-                  <script>
-                    const form = document.querySelector('form');
-                    // read the error
-                    const playerImageError = document.querySelector('.playerImage.error');
-                    const playerNameError = document.querySelector('.playerName.error');
-                    const positionError = document.querySelector('.position.error');
-                    const dobError = document.querySelector('.dob.error');
-                    const transferPriceError = document.querySelector('.transferPrice.error');
-                
-                    form.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        //reset errors
-                        playerImageError.textContent = '';
-                        playerNameError.textContent = '';
-                        positionError.textContent = '';
-                        dobError.textContent = '';
-                        transferPriceError.textContent = '';
-                
-                        // Create a FormData instance
-                        const formData = new FormData();
-                        formData.append('playerName', form.playerName.value);
-                        formData.append('position', form.position.value);
-                        formData.append('dob', form.dob.value);
-                        formData.append('transferPrice', form.transferPrice.value);
-                        formData.append('team', form.team.value);
-                        if (form.playerImage.files.length > 0) {
-                          formData.append('playerImage', form.playerImage.files[0]);
-                        }
-                
-                        console.log(formData);
-                        
-                        try{
-                            const res = await fetch('/addplayer', {
-                                method: 'POST',
-                                body: formData, // Send the form data
-                            });
-                            const data = await res.json();
-                            console.log(data);
-                
-                            if (data.errors){
-                                playerImageError.textContent = data.errors.playerImage;
-                                playerNameError.textContent = data.errors.playerName;
-                                positionError.textContent = data.errors.position;
-                                dobError.textContent = data.errors.dob;
-                                transferPriceError.textContent = data.errors.transferPrice;
-                            }
-                            else{
-                                descriptionError.textContent = ('Added successfully');
-                            }
-                        }
-                        catch (err){
-                            console.log(err);
-                        }
-                    });
-                  </script>
-                </div>
-              </section>
-            </main>
+            
 
             <section class="footer">
 
@@ -228,6 +228,8 @@
                 <div class="credit"> created by <span>Group 6</span> | all rights reserved! </div>
         
             </section>
-                
+        </section>
+    </main>
+</body>                
                   
 
