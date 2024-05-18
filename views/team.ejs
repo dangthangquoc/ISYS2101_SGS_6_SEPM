@@ -96,51 +96,53 @@
             <main class="table" id="customers_table">
             
                 <section class="table__body">
-                    <div class="addForm">
-                        <form enctype="multipart/form-data" action="/team">
+                    <div>
+                        <form enctype="multipart/form-data" action="/team" method="POST">
                             <h1>Add Team</h1>
+                            <div class="form-group">
+                                <lable for="teamName">Team Name</lable>
+                                <input type="text" name="teamName" class="form-control"/>
+                                <div class="teamName error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="teamImage">Team Image</label>
+                                <input type="file" name="teamImage" class="form-control" />
+                                <div class="teamImage error"></div>
+                            </div>
+                            <div class="form-group">
+                                <lable for="squadSize">Squad Size</lable>
+                                <input type="text" name="squadSize" class="form-control"/>
+                                <div class="squadSize error"></div>
+                            </div>
+                            <div class="form-group">
+                                <lable for="marketValue">Market Value</lable>
+                                <input type="text" name="marketValue" class="form-control"/>
+                                <div class="marketValue error"></div>
+                            </div>
+                            <div class="form-group">
+                                <lable for="transferRecord">Transfer Record</lable>
+                                <input type="text" name="transferRecord" class="form-control"/>
+                                <div class="transferRecord error"></div>
+                            </div>
+                            <div class="form-group">
+                                <lable for="avgPlayerValue">avg. Player Value</lable>
+                                <input type="text" name="avgPlayerValue" class="form-control"/>
+                                <div class="avgPlayerValue error"></div>
+                            </div>
+                            <div class="form-group">
+                                <lable for="avgAge">avg. Age</lable>
+                                <input type="text" name="avgAge" class="form-control"/>
+                                <div class="avgAge error"></div>
+                            </div>
                             <br>
-                        
-                            <lable for="teamName">teamName</lable>
-                            <input type="text" name="teamName"/>
-                            <div class="teamName error"></div>
-                            <br>
-                        
-                            <label for="teamImage">Team Image</label>
-                            <input type="file" name="teamImage" />
-                            <div class="teamImage error"></div>
-                            <br>
-                            
-                            <lable for="squadSize">squadSize</lable>
-                            <input type="text" name="squadSize"/>
-                            <div class="squadSize error"></div>
-                            <br>
-                        
-                            <lable for="marketValue">marketValue</lable>
-                            <input type="text" name="marketValue"/>
-                            <div class="marketValue error"></div>
-                            <br>
-                        
-                            <lable for="transferRecord">transferRecord</lable>
-                            <input type="text" name="transferRecord"/>
-                            <div class="transferRecord error"></div>
-                            <br>
-                        
-                            <lable for="avgPlayerValue">avgPlayerValue</lable>
-                            <input type="text" name="avgPlayerValue"/>
-                            <div class="avgPlayerValue error"></div>
-                            <br>
-                        
-                            <lable for="avgAge">avgAge</lable>
-                            <input type="text" name="avgAge"/>
-                            <div class="avgAge error"></div>
-                            <br>
-                        
-                            <button type="submit">Add team</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add team</button>
+                            </div>
                             
                             
                         </form>
-                        
+                    </div>
+                </section>
                         <script>
                             const form = document.querySelector('form');
                             // read the error

@@ -1,16 +1,6 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
 
-.middle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+
+
 
 .table {
     background-color: #fff;
@@ -19,10 +9,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.table__body {
-    max-width: 600px;
-    margin: auto;
-}
+
 
 .addForm {
     width: 100%;

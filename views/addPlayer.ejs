@@ -13,140 +13,28 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/form.css">
     <link rel="icon" type="image/x-icon" href="/images/fsrs.png">
 
 </head>
 <body>
     <!-- navbar -->
     <nav>
-      <div class="container">
-          <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-          <div class="search-bar">
-              <span class="material-icons-sharp">search</span>
-              <input type="search" placeholder="Search">
-          </div>
-          <div class="profile-area">
-              <button id="menu-btn">
-                  <span class="material-icons-sharp">menu</span>
-              </button>
-          </div>
-      </div>
-  </nav>
+        <div class="container">
+            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
+            <div class="search-bar">
+                <span class="material-icons-sharp">search</span>
+                <input type="search" placeholder="Search">
+            </div>
+            <div class="profile-area">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
   <!-- main -->
-    <main class="table" id="customers_table">
-
-                <section class="table__body">
-                    <div>
-                        <form enctype="multipart/form-data" action="/addplayer" method="POST">
-                            <h1>Add Player</h1>
-                            <div class="form-group">
-                                <label for="playerImage">Player Image</label>
-                                <input type="file" name="playerImage" id="playerImage" class="form-control"/>
-                                <div class="error playerImage-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="playerName">Player Name</label>
-                                <input type="text" name="playerName" id="playerName" class="form-control"/>
-                                <div class="error playerName-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="position">Position</label>
-                                <input type="text" name="position" id="position" class="form-control"/>
-                                <div class="error position-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="dob">Date of Birth</label>
-                                <input type="date" name="dob" id="dob" class="form-control"/>
-                                <div class="error dob-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="transferPrice">Transfer Price</label>
-                                <input type="text" name="transferPrice" id="transferPrice" class="form-control"/>
-                                <div class="error transferPrice-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label for="team">Select a Team</label>
-                                <select id="team" name="team" class="form-control">
-                                    <% team.forEach(team => { %>
-                                        <option value="<%= team._id %>"><%= team.teamName %></option>
-                                    <% }); %>
-                                </select>
-                                <div class="error team-error"></div>
-                            </div>
-        
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </div>
-                        </form>
-                    
-                        <script>
-                            const form = document.querySelector('form');
-                            // read the error
-                            const playerImageError = document.querySelector('.playerImage.error');
-                            const playerNameError = document.querySelector('.playerName.error');
-                            const positionError = document.querySelector('.position.error');
-                            const dobError = document.querySelector('.dob.error');
-                            const transferPriceError = document.querySelector('.transferPrice.error');
-                        
-                            form.addEventListener('submit', async (e) => {
-                                e.preventDefault();
-                                //reset errors
-                                playerImageError.textContent = '';
-                                playerNameError.textContent = '';
-                                positionError.textContent = '';
-                                dobError.textContent = '';
-                                transferPriceError.textContent = '';
-                        
-                                // Create a FormData instance
-                                const formData = new FormData();
-                                formData.append('playerName', form.playerName.value);
-                                formData.append('position', form.position.value);
-                                formData.append('dob', form.dob.value);
-                                formData.append('transferPrice', form.transferPrice.value);
-                                formData.append('team', form.team.value);
-                                if (form.playerImage.files.length > 0) {
-                                formData.append('playerImage', form.playerImage.files[0]);
-                                }
-                        
-                                console.log(formData);
-                                
-                                try{
-                                    const res = await fetch('/addplayer', {
-                                        method: 'POST',
-                                        body: formData, // Send the form data
-                                    });
-                                    const data = await res.json();
-                                    console.log(data);
-                        
-                                    if (data.errors){
-                                        playerImageError.textContent = data.errors.playerImage;
-                                        playerNameError.textContent = data.errors.playerName;
-                                        positionError.textContent = data.errors.position;
-                                        dobError.textContent = data.errors.dob;
-                                        transferPriceError.textContent = data.errors.transferPrice;
-                                    }
-                                    else{
-                                        descriptionError.textContent = ('Added successfully');
-                                    }
-                                }
-                                catch (err){
-                                    console.log(err);
-                                }
-                            });
-                        </script>
-                    </div>
-                </section>
-            </main>
     <main>
-
-      <!-- aside -->
         <aside>
             <button id="close-btn">
                 <span class="material-icons-sharp">close</span>
@@ -202,19 +90,71 @@
 
         <!--Middle Section-->
         <section class="middle">
-            
+            <main class="table" id="customers_table">
+
+                <section class="table__body">
+                    <div>
+                        <form enctype="multipart/form-data" action="/addplayer" method="POST">
+                            <h1>Add Player</h1>
+                            <div class="form-group">
+                                <label for="playerImage">Player Image</label>
+                                <input type="file" name="playerImage" id="playerImage" class="form-control"/>
+                                <div class="error playerImage-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="playerName">Player Name</label>
+                                <input type="text" name="playerName" id="playerName" class="form-control"/>
+                                <div class="error playerName-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="position">Position</label>
+                                <input type="text" name="position" id="position" class="form-control"/>
+                                <div class="error position-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" name="dob" id="dob" class="form-control"/>
+                                <div class="error dob-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="transferPrice">Transfer Price</label>
+                                <input type="text" name="transferPrice" id="transferPrice" class="form-control"/>
+                                <div class="error transferPrice-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="team">Select a Team</label>
+                                <select id="team" name="team" class="form-control">
+                                    <% team.forEach(team => { %>
+                                        <option value="<%= team._id %>"><%= team.teamName %></option>
+                                    <% }); %>
+                                </select>
+                                <div class="error team-error"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
 
             <section class="footer">
 
                 <div class="box-container">
-        
+
                     <div class="box">
                         <h3>Extra Links</h3>
                         <a href="/information"> <i class="fas fa-arrow-right"></i> About Us </a>
                         <a href="/copyright"> <i class="fas fa-arrow-right"></i> Copyright </a>
                         <a href="/privacyPolicy"> <i class="fas fa-arrow-right"></i> Privacy Policy </a>
                     </div>
-        
+
                     <div class="box">
                         <h3>Contact Info</h3>
                         <a href="https://www.facebook.com/profile.php?id=100010671730129" target="_blank"> <i class='far fa-id-badge'></i> Dang Trung Hieu - s3911594 </a>
@@ -222,14 +162,69 @@
                         <a href="https://www.facebook.com/profile.php?id=100015410506068" target="_blank"> <i class='far fa-id-badge'></i> Luu Van Thien Toan - s3979512 </a>
                         <a href="https://www.facebook.com/profile.php?id=100014016729432" target="_blank"> <i class='far fa-id-badge'></i> Dang Quoc Thang - s3977877 </a>
                     </div>
-        
+
                 </div>
-        
+
                 <div class="credit"> created by <span>Group 6</span> | all rights reserved! </div>
-        
+
             </section>
         </section>
-    </main>
+    </main>         
+    <script>
+        const form = document.querySelector('form');
+        // read the error
+        const playerImageError = document.querySelector('.playerImage.error');
+        const playerNameError = document.querySelector('.playerName.error');
+        const positionError = document.querySelector('.position.error');
+        const dobError = document.querySelector('.dob.error');
+        const transferPriceError = document.querySelector('.transferPrice.error');
+    
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            //reset errors
+            playerImageError.textContent = '';
+            playerNameError.textContent = '';
+            positionError.textContent = '';
+            dobError.textContent = '';
+            transferPriceError.textContent = '';
+    
+            // Create a FormData instance
+            const formData = new FormData();
+            formData.append('playerName', form.playerName.value);
+            formData.append('position', form.position.value);
+            formData.append('dob', form.dob.value);
+            formData.append('transferPrice', form.transferPrice.value);
+            formData.append('team', form.team.value);
+            if (form.playerImage.files.length > 0) {
+            formData.append('playerImage', form.playerImage.files[0]);
+            }
+    
+            console.log(formData);
+            
+            try{
+                const res = await fetch('/addplayer', {
+                    method: 'POST',
+                    body: formData, // Send the form data
+                });
+                const data = await res.json();
+                console.log(data);
+    
+                if (data.errors){
+                    playerImageError.textContent = data.errors.playerImage;
+                    playerNameError.textContent = data.errors.playerName;
+                    positionError.textContent = data.errors.position;
+                    dobError.textContent = data.errors.dob;
+                    transferPriceError.textContent = data.errors.transferPrice;
+                }
+                else{
+                    descriptionError.textContent = ('Added successfully');
+                }
+            }
+            catch (err){
+                console.log(err);
+            }
+        });
+    </script>
 </body>                
                   
 
