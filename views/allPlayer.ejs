@@ -20,11 +20,7 @@
     <!-- navbar -->
     <nav>
         <div class="container">
-            <a href="/"><img src="./images/fsrs.png" class="logo" alt="logo"></a>
-            <div class="search-bar">
-                <span class="material-icons-sharp">search</span>
-                <input type="search" placeholder="Search">
-            </div>
+            <a href="/"><img src="/images/fsrs.png" class="logo" alt="logo"></a>
             <div class="profile-area">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">menu</span>
@@ -103,6 +99,8 @@
                             </div>
                             <div class="profileName">
                                 <h3> <%= team.teamName %> </h3>
+                                <h4 style="color: white;">Squad Size: <%= team.squadSize %></h4>
+                                <h4 style="color: white;">Market Value: <%= team.marketValue %> </h4>
                             </div>
                         </div>
                         <thead>
