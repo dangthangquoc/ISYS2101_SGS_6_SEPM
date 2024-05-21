@@ -29,7 +29,7 @@ After that, go to http://localhost:5000 to view it in your browser!
 
 ## 🌟 Authors
 - Dang Quoc Thang - s3977877 (Backend Developer/Database Developer)
-- Lê Trung Hiếu - s3818683 (Full Stack Developer)
-- Đặng Trung Hiếu - s3911594 (Frontend Developer)
-- Lưu Văn Thiện Toàn - s3979512 (Database Developer)
+- Le Trung Hieu - s3818683 (Full Stack Developer)
+- Dang Trung Hieu - s3911594 (Frontend Developer)
+- Luu Van Thien Toan - s3979512 (Database Developer)
 
