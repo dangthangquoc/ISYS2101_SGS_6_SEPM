@@ -8,14 +8,6 @@ English football became the most popular sport for hundreds of years and attract
 - Checking English Football Clubs data 
 - Get recommendations from the system of which clubs to invest
 
-<b> For User: </b>
-- 
-- 
-
-<b> For Admin: </b>
-- Adding teams, players data
-- Modifying data 
-- 
 
 ## 🛠️ How to Run
 First, you need to install NPM Libraries required for this project
